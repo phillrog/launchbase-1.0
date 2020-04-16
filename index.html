@@ -3,15 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <title>Phillipe</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
         body {
             background: #282a36;
+            font-family: 'Open Sans', sans-serif;
         }
 
         header {
             padding: 32px;
+            border: 7px solid #333;
+            background: rgba(0,0,0,0.1); 
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header div a {
+            color: #fff;
+            font-size: 18px;
+            line-height: 28px;
+            margin: 0 16px;
+            padding-bottom: 3px;
+            text-decoration: none;
+            
+        }
+
+        header div a:hover {
+            color: #50fa7b;
+            transition: color 200ms;
         }
     </style>
 </head>
@@ -19,7 +49,7 @@
     <header>
         <div>
             <a href="/">Sobre</a>
-            <a href="/">Trabalhos</a>
+            <a href="/">Cursos</a>
         </div>
     </header>
 </body>
