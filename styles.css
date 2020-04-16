@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
+:root {
+    --color-green: #50fa7b;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +13,7 @@
 body {
     background: #282a36;
     font-family: 'Open Sans', sans-serif;
+    color: #fff;
 }
 
 header {
@@ -17,13 +22,13 @@ header {
     background: rgba(0,0,0,0.1); 
 }
 
-header div {
+.links {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-header div a {
+.links a {
     color: #fff;
     font-size: 18px;
     line-height: 28px;
@@ -33,8 +38,8 @@ header div a {
     
 }
 
-header div a:hover {
-    color: #50fa7b;
+.links a:hover {
+    color: var(--color-green);
     transition: color 200ms;
 }
 
@@ -47,11 +52,35 @@ header div a:hover {
     height: 200px;
     width: 200px;
     border-radius: 50%;
-    border: 5px solid #50fa7b;
+    border: 5px solid var(--color-green);
 }
 
 #wrapper h1 {
     font-size: 42px;
     line-height: 52px;
     font-weight: bold;
+}
+
+#wrapper h2 {
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: normal;
+    margin-top: 8px;
+    opacity: 0.8;
+
+}
+
+#wrapper p {
+    max-width: 500px;
+    margin: 32px auto;
+    font-size: 24px;
+    line-height: 34px;
+}
+
+#wrapper a {
+    color: var(--color-green);
+}
+
+#links-footer a{
+    border-bottom: 1px solid var(--color-green);
 }
