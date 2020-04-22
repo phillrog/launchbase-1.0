@@ -11,7 +11,8 @@ module.exports = [
         title: "Desvendando o CSS Grid na prática",
         duration: "36 min",
         price: "Free",
-        urlImg: "https://img.youtube.com/vi/HN1UjzRSdBk/maxresdefault.jpg" 
+        urlImg: "https://img.youtube.com/vi/HN1UjzRSdBk/maxresdefault.jpg" ,
+        featured: true
     },
     {
         id: "rAzHvYnQ8DY",
@@ -25,7 +26,8 @@ module.exports = [
         title: "O que é API? REST e RESTful?",
         duration: "33 min",
         price: "Free",
-        urlImg: "https://img.youtube.com/vi/ghTrp1x_1As/maxresdefault.jpg" 
+        urlImg: "https://img.youtube.com/vi/ghTrp1x_1As/maxresdefault.jpg" ,
+        featured: true
     },
     {
         id: "GSqR2i-Pq6o",
@@ -39,6 +41,7 @@ module.exports = [
         title: "Como usar Git e Github na prática: Guia para iniciantes",
         duration: "33 min",
         price: "Free",
-        urlImg: "https://img.youtube.com/vi/2alg7MQ6_sI/maxresdefault.jpg" 
+        urlImg: "https://img.youtube.com/vi/2alg7MQ6_sI/maxresdefault.jpg" ,
+        featured: true
     },
 ]

@@ -99,6 +99,7 @@ header {
 .card {
     background-color: var(--color-rocket);    
     display: grid;
+    cursor: pointer;
 }
 
 .card-image-container img{
@@ -165,4 +166,20 @@ iframe {
     position: absolute;
     top: 8%;
     
+}
+
+/* === FEATURED ===*/
+
+.featured-wrapper.card-image-container {
+    position: relative;
+}
+
+.featured {
+    background: #f7d057;
+    color: #111;
+    padding: 2px 8px;
+    position: absolute;
+    right: 5px;
+    border-radius: 16px;
+    top: -10px;
 }

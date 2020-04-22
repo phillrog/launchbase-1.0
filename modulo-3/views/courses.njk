@@ -14,8 +14,11 @@
     <section class="cards">
         {% for item in items %}
         <div class="card" id="{{ item.id }}">
-            <div class="card-image-container" >
+            <div class="card-image-container {{'featured-wrapper' if item.featured }}" >
                 <img src="{{item.urlImg}}" srcset="" alt="Imagem de {{item.title}}">
+                {% if item.featured %}
+                    <div class="featured">Featured</div>
+                {% endif %}
             </div>
             <div class="card-content">
                 <p>{{item.title}}</p>
