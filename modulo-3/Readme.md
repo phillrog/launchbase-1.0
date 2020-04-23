@@ -14,7 +14,6 @@ Template layout.njk
 
 ![layout](https://image.prntscr.com/image/YODQ33N2TquWJnLmgE3WHw.png)
 
-### Extendendo o template
+### Exemplo - Extendendo o template
 
-Exemplo:
 ![extendendo](https://image.prntscr.com/image/2HUE1QyFTM_kbbnO1ZVyWw.png)
