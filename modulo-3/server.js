@@ -39,15 +39,15 @@ server.get('/cursos', function(req,res){
     return res.render("courses", {items: videos});
 });
 
-server.get('/videos', function(req,res){
+server.get('/video', function(req,res){
     const id = req.query.id;
     const video = videos.find((v) => v.id == id);
 
     if (!video) {
         return res.send('Video not found');
     }
-    
-    return res.render('videos', video);
+
+    return res.render('video', { item: video });
 });
 
 server.listen(port, () => {
