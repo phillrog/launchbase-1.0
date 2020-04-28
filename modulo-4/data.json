@@ -1,0 +1,12 @@
+{
+  "instructors": [    
+    {
+      "avatar_url": "http://google.com.br",
+      "name": "Phillipe",
+      "birth": 1585699200000,
+      "gender": "on",
+      "services": "Musculação",
+      "created_at": 1588091986295
+    }
+  ]
+}
