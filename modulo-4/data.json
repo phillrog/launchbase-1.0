@@ -8,6 +8,15 @@
       "gender": "M",
       "services": "Musculação",
       "created_at": 1588093826204
+    },
+    {
+      "id": 2,
+      "avatar_url": "http://google.com.br",
+      "name": "Phillipe",
+      "birth": 1585699200000,
+      "gender": "M",
+      "services": "Musculação",
+      "created_at": 1588094301551
     }
   ]
 }
