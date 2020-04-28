@@ -1,12 +1,13 @@
 {
-  "instructors": [    
+  "instructors": [
     {
+      "id": 1,
       "avatar_url": "http://google.com.br",
       "name": "Phillipe",
       "birth": 1585699200000,
-      "gender": "on",
+      "gender": "M",
       "services": "Musculação",
-      "created_at": 1588091986295
+      "created_at": 1588093826204
     }
   ]
 }
