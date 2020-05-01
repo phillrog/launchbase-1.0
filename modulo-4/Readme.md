@@ -3,10 +3,6 @@ Curso rocketseat launchbase 1.0
 
 # Módulo - 3 parte 2
 
-# Template engine
-Foi utilizado [nunjucks](https://mozilla.github.io/nunjucks/)
-
-# Refatoração
  - Foi criado o portal de gerenciamento de academia( CRUD )
  - Diversas técnicas de css foram apresentados durante o desenvlvimento
 
