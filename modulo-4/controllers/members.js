@@ -38,10 +38,10 @@ exports.post = async function(req,res) {
     birth = Date.parse(req.body.birth);
 
     const created_at = Date.now();    
-    const id = 1;
+    let id = 1;
 
     if (data.members.length > 0) {
-        const lastId = data.members[data.mebers.length -1].id;
+        const lastId = data.members[data.members.length -1].id;
         id = lastId + 1;
     }
 
