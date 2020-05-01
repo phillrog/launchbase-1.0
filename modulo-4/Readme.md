@@ -26,7 +26,7 @@ Foi utilizado [nunjucks](https://mozilla.github.io/nunjucks/)
 
 ### Cadastro de membro
 
-![cadastro_membro](https://image.prntscr.com/image/Psy19RMGSpOlfe6p5Ah0vQ.png)
+![cadastro_membro](https://image.prntscr.com/image/ASCzSSmDQwKbolBcG2JbyQ.png)
 
 ### Visualizar cadastro do instrutor
 
