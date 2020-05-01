@@ -1,7 +1,7 @@
 # launchbase-1.0
 Curso rocketseat launchbase 1.0
 
-# Módulo - 3
+# Módulo - 3 parte 2
 
 # Template engine
 Foi utilizado [nunjucks](https://mozilla.github.io/nunjucks/)
