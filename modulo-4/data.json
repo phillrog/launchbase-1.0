@@ -1,17 +1,17 @@
 {
   "instructors": [
     {
-      "id": "1",
-      "avatar_url": "https://source.unsplash.com/collection/1509083/500x500",
+      "id": 1,
+      "avatar_url": "https://images.unsplash.com/photo-1526405294019-7f3f7c8c7867?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
       "name": "Professoras",
       "birth": 946684800000,
-      "gender": "F",
+      "gender": "M",
       "services": "Musculação, Crossfit, Natação",
       "created_at": 1588353441727
     },
     {
       "id": 2,
-      "avatar_url": "https://source.unsplash.com/collection/1509083/500x500",
+      "avatar_url": "https://images.unsplash.com/photo-1524002232583-bbe9d9d2eebd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=751&q=80",
       "name": "Professores",
       "birth": 345254400000,
       "gender": "M",

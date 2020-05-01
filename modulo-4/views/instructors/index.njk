@@ -13,8 +13,15 @@
         <tbody>
             {% for instructor in instructors %}
             <tr>
-                <td>{{ instructor.name }}</td>
-                <td>{{ instructor.services }}</td>
+                <td>
+                    <span style="background-image: url({{instructor.avatar_url}})"></span>
+                    {{ instructor.name }}
+                </td>
+                <td>
+                    {% for service in instructor.services.split(',') %}
+                        <span   >{{service}}</span>
+                    {% endfor %}
+                </td>
                 <td><a href="/instructors/{{instructor.id}}">Visualizar</a></td>
             </tr>
             {% endfor %}

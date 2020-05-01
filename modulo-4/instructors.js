@@ -83,9 +83,11 @@ exports.edit = function(req, res) {
 exports.put = async function(req, res) {
     // req.body
     const { id } = req.body;
+    let index = -1;
 
-    const foundInstructor = data.instructors.find(function (instructor) {
-        return instructor.id == id;
+    const foundInstructor = data.instructors.find(function (instructor, idx) {
+        index = idx; 
+        return instructor.id == id ;
     });
 
     if(!foundInstructor) return res.send('Instructor not found');
@@ -93,10 +95,11 @@ exports.put = async function(req, res) {
     const instructor = {
         ...foundInstructor,
         ...req.body,
-        birth: Date.parse(req.body.birth)
+        birth: Date.parse(req.body.birth),
+        id: Number(req.body.id)
     };
 
-    data.instructors[id - 1] = instructor;
+    data.instructors[index] = instructor;
 
     await fs.writeFileSync("data.json", JSON.stringify(data, null, 2), function(err) {
         if(err) return res.send("Write file has error");
