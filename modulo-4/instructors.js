@@ -24,7 +24,7 @@ exports.show = function(req,res) {
     return res.render('instructors/show', { instructor });
 }
 // post
-exports.post = async function(req,res, next) {
+exports.post = async function(req,res) {
     const keys = Object.keys(req.body);
     keys.forEach((i) => {
         if (req.body[i] == "")
