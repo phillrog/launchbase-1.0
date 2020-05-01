@@ -102,3 +102,20 @@ exports.put = async function(req, res) {
     
     return res.redirect(`/instructors/${id}`);
 }
+
+// delete
+exports.delete = async function(req, res) {
+    const {id} = req.body;
+
+    const filteredInstructors = data.instructors.filter((instructor)=> instructor.id != id);
+    
+    data.instructors = filteredInstructors;
+
+    await fs.writeFileSync("data.json", JSON.stringify(data, null, 2), function(err){
+        if(err) return res.send('Write file has error');
+        
+        return res.redirect(`/instructors`);
+    });
+
+    return res.redirect(`/instructors`);
+}

@@ -8,6 +8,15 @@
       "gender": "F",
       "services": "Musculação, Crossfit, Natação",
       "created_at": 1588353441727
+    },
+    {
+      "id": 2,
+      "avatar_url": "https://source.unsplash.com/collection/1509083/500x500",
+      "name": "Professores",
+      "birth": 345254400000,
+      "gender": "M",
+      "services": "Musculação, Crossfit",
+      "created_at": 1588357345616
     }
   ]
 }

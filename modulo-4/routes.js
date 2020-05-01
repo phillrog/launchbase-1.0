@@ -29,4 +29,6 @@ routes.get('/members', function(req,res){
     return res.send('Ola');
 });
 
+routes.delete('/instructors', instructors.delete);
+
 module.exports = routes;
