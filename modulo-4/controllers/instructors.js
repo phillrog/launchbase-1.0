@@ -1,13 +1,12 @@
 const fs = require('fs');
-const data = require('./data');
-const { age, date } = require('./utils');
+const data = require('../data');
+const { age, date } = require('../utils');
 const Intl = require("intl");
 
 exports.index = function(req, res) {
     return res.render('instructors/index', { instructors: data.instructors })
 }
 
-//show
 exports.show = function(req,res) {
     // req.params
     const { id } = req.params;
@@ -27,7 +26,8 @@ exports.show = function(req,res) {
     }
     return res.render('instructors/show', { instructor });
 }
-// post
+
+
 exports.post = async function(req,res) {
     const keys = Object.keys(req.body);
     keys.forEach((i) => {
@@ -61,7 +61,7 @@ exports.post = async function(req,res) {
     return res.redirect(`/instructors/${id}`);
 }
 
-//edit
+
 exports.edit = function(req, res) {
     // req.params
     const { id } = req.params;
@@ -79,7 +79,7 @@ exports.edit = function(req, res) {
     return res.render('instructors/edit', {instructor });
 }
 
-// put
+
 exports.put = async function(req, res) {
     // req.body
     const { id } = req.body;
@@ -110,7 +110,7 @@ exports.put = async function(req, res) {
     return res.redirect(`/instructors/${id}`);
 }
 
-// delete
+
 exports.delete = async function(req, res) {
     const {id} = req.body;
 
@@ -125,4 +125,8 @@ exports.delete = async function(req, res) {
     });
 
     return res.redirect(`/instructors`);
+}
+
+exports.create = function(req, res) {
+    return res.render('./instructors/create');
 }
