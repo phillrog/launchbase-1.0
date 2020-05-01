@@ -19,5 +19,19 @@ module.exports = {
         const day = `0${date.getUTCDate()}`.slice(-2);
 
         return `${year}-${month}-${day}`;
+    },
+    typeBlood: (blood) => {
+        const types = {  
+            "A1" : "A+",
+            "A0" : "A-",
+            "B1" : "B+",
+            "B0" : "B-",
+            "AB1":"AB+",
+            "AB0": "AB-",
+            "O1" : "O+",
+            "O0" : "O-"
+        };
+
+        return types[blood]
     }
 }

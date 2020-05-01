@@ -1,6 +1,6 @@
 const fs = require('fs');
 const data = require('../data');
-const { age, date } = require('../utils');
+const { age, date, typeBlood } = require('../utils');
 const Intl = require("intl");
 
 exports.index = function(req, res) {
@@ -19,7 +19,8 @@ exports.show = function(req,res) {
 
     const member = {
         ...foundMember,
-        age : age(foundMember.birth),
+        birth : date(foundMember.birth),
+        blood : typeBlood(foundMember.blood),
         created_at: (new Intl.DateTimeFormat("pt-BR")).format(foundMember.created_at)
     }
     return res.render('members/show', { member });
@@ -32,22 +33,24 @@ exports.post = async function(req,res) {
             return res.send(`Please fill all fields!`)
     });
 
-    let {avatar_url, name, birth, gender, services } = req.body;
+    let { birth } = req.body;
 
     birth = Date.parse(req.body.birth);
 
-    const created_at = Date.now();
-    const id = Number(data.members.length) + 1;
+    const created_at = Date.now();    
+    const id = 1;
+
+    if (data.members.length > 0) {
+        const lastId = data.members[data.mebers.length -1].id;
+        id = lastId + 1;
+    }
 
     data.members.push({
-        id,
-        avatar_url, 
-        name, 
+        ... req.body,
         birth, 
-        gender, 
-        services, 
+        id,
         created_at
-        });
+    });
 
     await fs.writeFileSync("data.json", JSON.stringify(data, null, 2), function(err) {
         if(err) return res.send("Write file has error");
