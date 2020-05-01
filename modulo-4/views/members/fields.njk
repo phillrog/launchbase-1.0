@@ -2,21 +2,21 @@
         <div>Avatar URL</div>
             <div><input type="url" name="avatar_url" id="avatar_url"
             placeholder="http://"
-            value="{{Member.avatar_url}}"
+            value="{{member.avatar_url}}"
             ></div>
         </div>
         <div class="item">
             <div>Nome</div>
             <div><input type="text" name="name" id="name"
             placeholder="Nome do membro"
-            value="{{Member.name}}"
+            value="{{member.name}}"
             ></div>
         </div>
                 <div class="item">
             <div>E-mail</div>
             <div><input type="email" name="email" id="email"
 
-            value="{{Member.email}}"
+            value="{{member.email}}"
             ></div>
         </div>
         <div class="item">
@@ -29,11 +29,11 @@
             <div>Sexo</div>
             <div>
                 <span><input type="radio" name="gender" checked 
-                value="M" {% if Member.gender == "M" %}
+                value="M" {% if member.gender == "M" %}
                 checked
                 {% endif %}>Masculino</span>
                 <span><input type="radio" name="gender" value="F"
-                {% if Member.gender == "F" %}
+                {% if member.gender == "F" %}
                 checked
                 {% endif %}
                 >Feminino</span>

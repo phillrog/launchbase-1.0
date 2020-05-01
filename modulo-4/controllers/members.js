@@ -1,6 +1,6 @@
 const fs = require('fs');
 const data = require('../data');
-const { age, date, typeBlood } = require('../utils');
+const { date, typeBlood } = require('../utils');
 const Intl = require("intl");
 
 exports.index = function(req, res) {
@@ -19,7 +19,7 @@ exports.show = function(req,res) {
 
     const member = {
         ...foundMember,
-        birth : date(foundMember.birth),
+        birth : date(foundMember.birth).birthDay,
         blood : typeBlood(foundMember.blood),
         created_at: (new Intl.DateTimeFormat("pt-BR")).format(foundMember.created_at)
     }
@@ -73,7 +73,7 @@ exports.edit = function(req, res) {
     
     const member = {
         ...foundMember,
-        birth: date(foundMember.birth)
+        birth: date(foundMember.birth).iso
     }
     return res.render('members/edit', {member });
 }
