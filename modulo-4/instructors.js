@@ -1,6 +1,6 @@
 const fs = require('fs');
 const data = require('./data');
-const { age } = require('./utils');
+const { age, date } = require('./utils');
 const Intl = require("intl");
 
 //show
@@ -24,7 +24,7 @@ exports.show = function(req,res) {
     return res.render('instructors/show', { instructor });
 }
 // post
-exports.post = function(req,res) {
+exports.post = async function(req,res, next) {
     const keys = Object.keys(req.body);
     keys.forEach((i) => {
         if (req.body[i] == "")
@@ -48,16 +48,13 @@ exports.post = function(req,res) {
         created_at
         });
 
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err) {
+    await fs.writeFileSync("data.json", JSON.stringify(data, null, 2), function(err) {
         if(err) return res.send("Write file has error");
 
         return res.redirect('/instructors');
     });
 
-    return res.send(req.body);
-
-
-
+    return res.redirect(`/instructors/${id}`);
 }
 
 //edit
@@ -71,5 +68,9 @@ exports.edit = function(req, res) {
     
     if(!foundInstructor) return res.send('Instructor not found');
     
-    return res.render('instructors/edit', {instructor : foundInstructor});
+    const instructor = {
+        ...foundInstructor,
+        birth: date(foundInstructor.birth)
+    }
+    return res.render('instructors/edit', {instructor });
 }

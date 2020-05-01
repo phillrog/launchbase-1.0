@@ -3,20 +3,11 @@
     {
       "id": 1,
       "avatar_url": "https://source.unsplash.com/collection/1509083/500x500",
-      "name": "Phillipe",
-      "birth": 621572400000,
-      "gender": "M",
-      "services": "Musculação",
-      "created_at": 1588093826204
-    },
-    {
-      "id": 2,
-      "avatar_url": "https://source.unsplash.com/collection/1509083/500x500",
-      "name": "Phillipe",
-      "birth": 621572400000,
-      "gender": "M",
-      "services": "Musculação",
-      "created_at": 1588094301551
+      "name": "Professora",
+      "birth": 915148800000,
+      "gender": "F",
+      "services": "Musculação, Crossfit",
+      "created_at": 1588353441727
     }
   ]
 }
