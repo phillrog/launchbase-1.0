@@ -74,3 +74,31 @@ exports.edit = function(req, res) {
     }
     return res.render('instructors/edit', {instructor });
 }
+
+// put
+exports.put = async function(req, res) {
+    // req.body
+    const { id } = req.body;
+
+    const foundInstructor = data.instructors.find(function (instructor) {
+        return instructor.id == id;
+    });
+
+    if(!foundInstructor) return res.send('Instructor not found');
+
+    const instructor = {
+        ...foundInstructor,
+        ...req.body,
+        birth: Date.parse(req.body.birth)
+    };
+
+    data.instructors[id - 1] = instructor;
+
+    await fs.writeFileSync("data.json", JSON.stringify(data, null, 2), function(err) {
+        if(err) return res.send("Write file has error");
+
+        return res.redirect(`/instructors/${id}`);
+    });
+    
+    return res.redirect(`/instructors/${id}`);
+}
