@@ -264,7 +264,8 @@ tbody tr td:nth-child(2) span {
     font-size: 12px;
 }
 
-tbody tr td:last-child a {
+tbody tr td:last-child a,
+.table-container > a {
     background-color: var(--primary-color);
     padding: 8px 16px;
     text-decoration: none;
@@ -276,4 +277,9 @@ tbody tr td:last-child a {
 
 .table-container  thead tr th:last-child, td:last-child {
     text-align: center;
+}
+
+.table-container > a {
+    margin-bottom: 16px;
+    display: inline-block;
 }
