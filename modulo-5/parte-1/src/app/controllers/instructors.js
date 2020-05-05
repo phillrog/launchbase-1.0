@@ -14,6 +14,8 @@ module.exports = {
     },
     async show(req,res){
         await Instructor.findAsync(req.params.id, (data) => {
+            if (!instructor) return res.send('Instructor not found');
+
             const instructor = {
                 ...data,
                 age : age(data.birth),
@@ -27,6 +29,8 @@ module.exports = {
     },
     edit(re,res){
         await Instructor.findAsync(req.params.id, (instructor) => {
+            if (!instructor) return res.send('Instructor not found');
+
             instructor.birth = date(instructor.birth).iso;
             
             return res.render('instructors/show', { instructor });

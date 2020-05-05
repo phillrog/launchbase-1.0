@@ -1,30 +1,30 @@
 const db = require("../../../models");
-const Instructor = db.Instructors;
+const Member = db.Members;
 const Op = db.Sequelize.Op;
 
 module.exports = {
     async all(callback) {
-        const data = await Instructor.findAll({
+        const data = await Member.findAll({
             order: [
                 'name', 'ASC'
             ]
         })
-        .then(function(instructor) {            
-            return instructor.dataValues;
+        .then(function(member) {            
+            return member.dataValues;
          });
 
          callback(data);
     },
     async findAsync(id, callback) {
-        const data = await Instructor.findOne({
+        const data = await Member.findOne({
             where: {
                id
             }
-         }).then(function(instructor) {
-            if (!instructor) {
-                throw 'Instructor not found';
+         }).then(function(member) {
+            if (!member) {
+                throw 'Member not found';
             }
-            return instructor.dataValues;
+            return member.dataValues;
          });
          callback(data);
     },
@@ -36,42 +36,48 @@ module.exports = {
             throw `Please fill all fields!`;
         });
     
-        const {avatar_url, name, gender, services } = data;
+        const {avatar_url, name, gender, blood, height, weight, email } = data;
  
-        const instructor = await Instructor.create({
+        const member = await Member.create({
                 avatar_url: avatar_url, 
                 name: name, 
                 birth:  date( data.birth).iso, 
                 gender: gender, 
-                services: services,
+                blood: blood,
+                height: height,
+                weight: weight,
+                email: email,
                 created_at: created_at = date(Date.now()).iso
             })
-            .then(function(instructor) {
-                return instructor.dataValues;
+            .then(function(member) {
+                return member.dataValues;
             })
             .catch(function(err) {
                 // print the error details
                 console.log(err, data.name);
             });
-        callback(instructor);
+        callback(member);
     },
 
     async updateAsync(data, callback) {
-        const instructor = await Instructor.update(
+        const member = await Member.update(
             {
                 avatar_url: data.avatar_url, 
-                name: data.name, 
+                name: name, 
                 birth:  date( data.birth).iso, 
                 gender: data.gender, 
-                services: data.services,
+                blood: data.blood,
+                height: data.height,
+                weight: data.weight,
+                email: data.email,
                 created_at: date(data.created_at).iso
             }, {
             where: {
                 id: data.id
             }
         })
-        .then(function(instructor) {
-            return instructor.dataValues;
+        .then(function(member) {
+            return member.dataValues;
         })
         .catch(function(err) {   
             console.log(err, data.name);
@@ -81,13 +87,13 @@ module.exports = {
     },
 
     async deleteAsync(id, callback) {
-        const data = await Instructor.delete({
+        const data = await Member.delete({
             where : {
                 id 
             }
         })
-        .then(function(instructor) {            
-            return instructor
+        .then(function(member) {            
+            return member
          });
 
          callback();

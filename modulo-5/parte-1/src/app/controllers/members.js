@@ -1,42 +1,43 @@
 const { age, date } = require('../../lib/utils');
 const Intl = require("intl");
+const Member = require('../models/Member');
 
 module.exports = {
-    index(re,res){
-        return;
+    async index(re,res){
+        await Member.allSync((members) => res.render('./members/index', { members }));        
     },
     create(re,res){
         return res.render('./members/create');
     },
-    post(re,res){
-        const keys = Object.keys(req.body);
-        keys.forEach((i) => {
-            if (req.body[i] == "")
-                return res.send(`Please fill all fields!`)
-        });
-    
-        let {avatar_url, name, birth, gender, services } = req.body;
-    
-        return;
+    async post(req,res){
+        await Member.createAsync(req.body, (member) => res.redirect(`/members/${member.id}`));
     },
-    show(re,res){
-        
+    async show(req,res){
+        await Member.findAsync(req.params.id, (data) => {
+            if (!member) return res.send('Member not found');
+
+            member.birth = date(member.birth).birthDay;
+    
+            return res.render('members/show', { member });
+        });         
     },
     edit(re,res){
-        return;
+        await Member.findAsync(req.params.id, (member) => {
+            if (!member) return res.send('Member not found');
+
+            member.birth = date(member.birth).birthDay;
+            
+            return res.render('members/show', { member });
+        });   
     },
-    put(re,res){
-        const keys = Object.keys(req.body);
-        keys.forEach((i) => {
-            if (req.body[i] == "")
-                return res.send(`Please fill all fields!`)
-        });
-    
-        let {avatar_url, name, birth, gender, services } = req.body;
-    
-        return;
+    async put(req,res){
+        await Member.updateAsync(req.body, () =>{
+            return res.redirect(`members/${req.body.id}`);
+        });    
     },
-    delete(re,res){
-        return;
+    async delete(req,res){
+        await Member.deleteAsync(req.body.id, () =>{
+            return res.redirect(`members/${req.body.id}`);
+        }); 
     },
 }
