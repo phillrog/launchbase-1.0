@@ -26,20 +26,20 @@ module.exports = {
         });         
     },
     edit(re,res){
-        return;
+        await Instructor.findAsync(req.params.id, (instructor) => {
+            instructor.birth = date(instructor.birth).iso;
+            
+            return res.render('instructors/show', { instructor });
+        });   
     },
-    put(re,res){
-        const keys = Object.keys(req.body);
-        keys.forEach((i) => {
-            if (req.body[i] == "")
-                return res.send(`Please fill all fields!`)
-        });
-    
-        let {avatar_url, name, birth, gender, services } = req.body;
-    
-        return;
+    async put(req,res){
+        await Instructor.updateAsync(req.body, () =>{
+            return res.redirect(`instructors/${req.body.id}`);
+        });    
     },
-    delete(re,res){
-        return;
+    async delete(req,res){
+        await Instructor.deleteAsync(req.body.id, () =>{
+            return res.redirect(`instructors/${req.body.id}`);
+        }); 
     },
 }

@@ -18,7 +18,7 @@ module.exports = {
             }
          }).then(function(instructor) {
             if (!instructor) {
-                return 'Instructor not found';
+                throw 'Instructor not found';
             }
             return instructor.dataValues;
          });
@@ -29,7 +29,7 @@ module.exports = {
         const keys = Object.keys(data);
         keys.forEach((i) => {
             if (data[i] == "")
-                return res.send(`Please fill all fields!`)
+            throw `Please fill all fields!`;
         });
     
         const {avatar_url, name, gender, services } = data;
@@ -50,5 +50,42 @@ module.exports = {
                 console.log(err, data.name);
             });
         callback(instructor);
+    },
+
+    async updateAsync(data, callback) {
+        const instructor = await Instructor.update(
+            {
+                avatar_url: data.avatar_url, 
+                name: data.name, 
+                birth:  date( data.birth).iso, 
+                gender: data.gender, 
+                services: data.services,
+                created_at: date(data.created_at).iso
+            }, {
+            where: {
+                id: data.id
+            }
+        })
+        .then(function(instructor) {
+            return instructor.dataValues;
+        })
+        .catch(function(err) {   
+            console.log(err, data.name);
+        });
+
+        callback();
+    },
+
+    async deleteAsync(id, callback) {
+        const data = await Instructor.delete({
+            where : {
+                id 
+            }
+        })
+        .then(function(instructor) {            
+            return instructor
+         });
+
+         callback();
     }
 }
