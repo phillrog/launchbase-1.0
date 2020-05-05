@@ -33,8 +33,18 @@ module.exports = {
       },
       created_at: {
         allowNull: true,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE,        
+        field: 'created_at'
       },
+      createdAt: {
+        type: Sequelize.DATE,      
+        defaultValue: Sequelize.NOW
+      },    
+      updatedAt: {
+          allowNull: true,
+          type: Sequelize.DATE,      
+          field: 'updated_at'
+      }
     });
 
     return InstructorTable;
