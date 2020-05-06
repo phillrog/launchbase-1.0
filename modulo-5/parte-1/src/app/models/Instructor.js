@@ -1,18 +1,24 @@
 const db = require("../../../models");
 const Instructor = db.Instructors;
 const Op = db.Sequelize.Op;
+const { age, date } = require('../../lib/utils');
 
 module.exports = {
-    async all(callback) {
+    async allAsync(callback) {
         const data = await Instructor.findAll({
             order: [
-                'name', 'ASC'
-            ]
+                'name',
+            ],
+            attributes: ["id", "avatar_url", "name", "birth", "gender", "services", "created_at"]
         })
-        .then(function(instructor) {            
-            return instructor.dataValues;
-         });
-
+        .then(function(instructor, err) {      
+     
+            return instructor;
+         })
+         .catch( error => {
+            console.error(error);
+          });
+         
          callback(data);
     },
     async findAsync(id, callback) {
@@ -20,31 +26,23 @@ module.exports = {
             where: {
                id
             }
-         }).then(function(instructor) {
-            if (!instructor) {
-                throw 'Instructor not found';
-            }
+         }).then(function(instructor) {     
+            if (!instructor) return undefined;      
             return instructor.dataValues;
          });
          callback(data);
     },
 
-    async createAsync(data, callback) {
-        const keys = Object.keys(data);
-        keys.forEach((i) => {
-            if (data[i] == "")
-            throw `Please fill all fields!`;
-        });
-    
+    async createAsync(data, callback) {        
         const {avatar_url, name, gender, services } = data;
- 
+         
         const instructor = await Instructor.create({
                 avatar_url: avatar_url, 
                 name: name, 
                 birth:  date( data.birth).iso, 
                 gender: gender, 
                 services: services,
-                created_at: created_at = date(Date.now()).iso
+                created_at: date(Date.now()).iso
             })
             .then(function(instructor) {
                 return instructor.dataValues;
@@ -64,7 +62,7 @@ module.exports = {
                 birth:  date( data.birth).iso, 
                 gender: data.gender, 
                 services: data.services,
-                created_at: date(data.created_at).iso
+                updateAt: date(Date.now()).iso
             }, {
             where: {
                 id: data.id
@@ -81,7 +79,7 @@ module.exports = {
     },
 
     async deleteAsync(id, callback) {
-        const data = await Instructor.delete({
+        const data = await Instructor.destroy({
             where : {
                 id 
             }

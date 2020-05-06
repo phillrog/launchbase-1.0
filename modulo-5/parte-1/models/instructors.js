@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
     const Instructor = sequelize.define('Instructors', {
         id: {
@@ -40,7 +41,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             field: 'updated_at'
         }
-    });
+    });   
 
     return Instructor;
   }
+

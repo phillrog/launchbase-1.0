@@ -1,60 +1,69 @@
 'use strict';
 
-module.exports = (sequelize, DataTypes) => {
-    const Member = sequelize.define('Members', {
+module.exports =  (sequelize, DataTypes) => {
+    const Member = sequelize.define('Members', 
+    {
           id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             unique: true,
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
           },
           name: {
             allowNull: true,
-            type: Sequelize.TEXT,
+            type: DataTypes.TEXT,
           },      
           avatar_url: {
             allowNull: true,
-            type: Sequelize.TEXT,
+            type: DataTypes.TEXT,
           },
           email: {
             allowNull: true,
-            type: Sequelize.TEXT,
+            type: DataTypes.TEXT,
           },
           gender: {
             allowNull: true,
-            type: Sequelize.TEXT
+            type: DataTypes.TEXT
           },
           birth: {
             allowNull: true,
-            type: Sequelize.DATE
+            type: DataTypes.DATE
           },
           blood: {
             allowNull: true,
-            type: Sequelize.TEXT
+            type: DataTypes.TEXT
           },
           weight: {
             allowNull: true,
-            type: Sequelize.INTEGER
+            type: DataTypes.INTEGER
           },
           height: {
             allowNull: true,
-            type: Sequelize.INTEGER
+            type: DataTypes.INTEGER
           },
           created_at: {
             allowNull: true,
-            type: Sequelize.DATE,        
+            type: DataTypes.DATE,        
             field: 'created_at'
           },
           createdAt: {
-            type: Sequelize.DATE,      
-            defaultValue: Sequelize.NOW
+            type: DataTypes.DATE,      
+            defaultValue: DataTypes.NOW
           },    
           updatedAt: {
               allowNull: true,
-              type: Sequelize.DATE,      
+              type: DataTypes.DATE,      
               field: 'updated_at'
+          },
+          instrutor_id: {
+            type: DataTypes.INTEGER, 
+            foreignKey: true,
+            references: {
+                model: 'Instructors',
+                key: 'id'
+            }
           }
-        });
+    });
     return Member;
 }

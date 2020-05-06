@@ -23,6 +23,21 @@ services:
       - postgres
     networks:
       - postgres-network
+  
+  app:
+    working_dir: /home/app
+    entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    image: node:10.12.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/app
+    environment:
+      DB_HOST: db
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
 
 networks: 
   postgres-network:

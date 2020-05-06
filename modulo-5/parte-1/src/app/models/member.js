@@ -1,16 +1,17 @@
 const db = require("../../../models");
 const Member = db.Members;
 const Op = db.Sequelize.Op;
+const { age, date, typeBlood } = require('../../lib/utils');
 
 module.exports = {
-    async all(callback) {
+    async allAsync(callback) {
         const data = await Member.findAll({
             order: [
-                'name', 'ASC'
+                'name'
             ]
         })
-        .then(function(member) {            
-            return member.dataValues;
+        .then(function(members) {            
+            return members;
          });
 
          callback(data);
@@ -20,22 +21,15 @@ module.exports = {
             where: {
                id
             }
-         }).then(function(member) {
-            if (!member) {
-                throw 'Member not found';
-            }
+         }).then(function(member) {  
+            if (!member) return undefined;         
             return member.dataValues;
          });
          callback(data);
     },
 
     async createAsync(data, callback) {
-        const keys = Object.keys(data);
-        keys.forEach((i) => {
-            if (data[i] == "")
-            throw `Please fill all fields!`;
-        });
-    
+            
         const {avatar_url, name, gender, blood, height, weight, email } = data;
  
         const member = await Member.create({
@@ -43,7 +37,7 @@ module.exports = {
                 name: name, 
                 birth:  date( data.birth).iso, 
                 gender: gender, 
-                blood: blood,
+                blood:  blood,
                 height: height,
                 weight: weight,
                 email: email,
@@ -63,14 +57,14 @@ module.exports = {
         const member = await Member.update(
             {
                 avatar_url: data.avatar_url, 
-                name: name, 
+                name: data.name, 
                 birth:  date( data.birth).iso, 
                 gender: data.gender, 
                 blood: data.blood,
                 height: data.height,
                 weight: data.weight,
                 email: data.email,
-                created_at: date(data.created_at).iso
+                update_at: date(data.created_at).iso
             }, {
             where: {
                 id: data.id
@@ -80,14 +74,14 @@ module.exports = {
             return member.dataValues;
         })
         .catch(function(err) {   
-            console.log(err, data.name);
+            console.log(err);
         });
 
         callback();
     },
 
     async deleteAsync(id, callback) {
-        const data = await Member.delete({
+        const data = await Member.destroy({
             where : {
                 id 
             }
