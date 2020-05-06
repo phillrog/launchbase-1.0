@@ -34,4 +34,12 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Members.associate = function(models) {
+  Membersuser.hasOne(models.Instructors, {foreignKey: 'instrutor_id', as: 'Instructors'})
+};
+
+db.Instructors.associate = function(models) {
+  Instructors.hasMany(models.Members, {foreignKey: 'instructor_id', as: 'Members'})
+};
+
 module.exports = db;

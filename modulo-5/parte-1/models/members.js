@@ -64,6 +64,7 @@ module.exports =  (sequelize, DataTypes) => {
                 key: 'id'
             }
           }
-    });
+    }, {});
+
     return Member;
 }

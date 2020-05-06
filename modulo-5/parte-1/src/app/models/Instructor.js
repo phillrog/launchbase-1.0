@@ -1,5 +1,6 @@
 const db = require("../../../models");
 const Instructor = db.Instructors;
+const Member = db.Members;
 const Op = db.Sequelize.Op;
 const { age, date } = require('../../lib/utils');
 
@@ -9,7 +10,15 @@ module.exports = {
             order: [
                 'name',
             ],
-            attributes: ["id", "avatar_url", "name", "birth", "gender", "services", "created_at"]
+            attributes: ["id", "avatar_url", "name", "birth", "gender", "services", "created_at",
+                [db.sequelize.fn('COUNT', db.sequelize.col('Members.instructor_id')), 'total_students'],
+            ],
+            include: [{
+                model: Member,
+                attributes: ['instructor_id']
+            }],
+            group: ['Instructors.id']
+                
         })
         .then(function(instructor, err) {      
      

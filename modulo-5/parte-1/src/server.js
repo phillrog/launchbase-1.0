@@ -17,11 +17,8 @@ db.sequelize.sync()
     .then(function(instance){
         return instance.update({syncedAt: sequelize.fn('NOW')});
     })
-    .then(function () {
-        process.exit(0);
-    })
     .catch(function(err){
-        console.log('Caught error! ' + err);
+
     });
 
 nunjucks.configure("src/app/views", {
