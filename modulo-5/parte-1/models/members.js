@@ -56,7 +56,7 @@ module.exports =  (sequelize, DataTypes) => {
               type: DataTypes.DATE,      
               field: 'updated_at'
           },
-          instrutor_id: {
+          instructor_id: {
             type: DataTypes.INTEGER, 
             foreignKey: true,
             references: {

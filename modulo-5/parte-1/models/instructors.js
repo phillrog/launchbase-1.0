@@ -1,5 +1,4 @@
 
-const Member = './members';
 const sequelize = require('./index');
 
 module.exports = (sequelize, DataTypes) => {
@@ -43,10 +42,14 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: {
             type: DataTypes.DATE,
             field: 'updated_at'
+        },
+        total_students: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     }, {});
-    
-    
+        
     return Instructor;
   }
 
+  

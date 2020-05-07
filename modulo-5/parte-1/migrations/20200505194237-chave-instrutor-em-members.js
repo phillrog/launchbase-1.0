@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(      
         'Members',
-        'instrutor_id',
+        'instructor_id',
          {
            type: Sequelize.INTEGER, 
            foreignKey: true,
@@ -19,7 +19,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
       'Members',
-      'instrutor_id'
+      'instructor_id'
     )
   }
 };

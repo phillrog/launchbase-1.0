@@ -13,7 +13,7 @@ services:
       - postgres-network
       
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4    
     environment:
       PGADMIN_DEFAULT_EMAIL: "phillrog@hotmail.com"
       PGADMIN_DEFAULT_PASSWORD: "1234"
@@ -29,11 +29,11 @@ services:
     entrypoint: ["/bin/bash", "./entrypoint.sh"]
     image: node:10.12.0
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - .:/home/app
     environment:
-      DB_HOST: db
+      DB_HOST: postgres
     depends_on:
       - postgres
     networks:

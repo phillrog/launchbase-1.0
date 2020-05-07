@@ -10,18 +10,26 @@ module.exports = {
             order: [
                 'name',
             ],
-            attributes: ["id", "avatar_url", "name", "birth", "gender", "services", "created_at",
-                [db.sequelize.fn('COUNT', db.sequelize.col('Members.instructor_id')), 'total_students'],
+            attributes: [
+                "id",
+            "avatar_url", 
+            "name", 
+            "birth", 
+            "gender", 
+            "services", 
+            "created_at",
+                [db.sequelize.cast( db.sequelize.fn('COUNT', db.sequelize.col('Members.*')), 'INTEGER'), 'total_students'],
             ],
             include: [{
                 model: Member,
-                attributes: ['instructor_id']
+                attributes: [],
+                as: 'Members'
             }],
-            group: ['Instructors.id']
+            group: [db.sequelize.col('Instructors.id')]
                 
         })
-        .then(function(instructor, err) {      
-     
+        .then(function(instructor, err) {    
+            console.log(instructor);  
             return instructor;
          })
          .catch( error => {
