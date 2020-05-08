@@ -1,5 +1,6 @@
 const db = require("../../../models");
 const Member = db.Members;
+const Instructor = db.Instructors;
 const Op = db.Sequelize.Op;
 const { age, date, typeBlood } = require('../../lib/utils');
 
@@ -20,9 +21,14 @@ module.exports = {
         const data = await Member.findOne({
             where: {
                id
-            }
+            },
+            include: [{
+                model: Instructor,
+                attributes: [[ "name", "instructor_name"]]
+            }],
          }).then(function(member) {  
-            if (!member) return undefined;         
+            if (!member) return undefined;       
+  
             return member.dataValues;
          });
          callback(data);
@@ -41,7 +47,8 @@ module.exports = {
                 height: height,
                 weight: weight,
                 email: email,
-                created_at: created_at = date(Date.now()).iso
+                created_at: created_at = date(Date.now()).iso,
+                instructor_id: data.instructor
             })
             .then(function(member) {
                 return member.dataValues;
@@ -64,7 +71,8 @@ module.exports = {
                 height: data.height,
                 weight: data.weight,
                 email: data.email,
-                update_at: date(data.created_at).iso
+                update_at: date(data.created_at).iso,
+                instructor_id: data.instructor
             }, {
             where: {
                 id: data.id
@@ -91,5 +99,19 @@ module.exports = {
          });
 
          callback();
+    },
+
+    async instructorsSelectOptions(callback){
+        const data = await Instructor.findAll(
+            {
+                attributes:["id","name"],
+                order: [
+                    'name'
+                ]
+            }
+        )
+        .then((instructors) =>  instructors);
+
+        return callback(data);
     }
 }

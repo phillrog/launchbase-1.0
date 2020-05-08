@@ -29,7 +29,7 @@ services:
     entrypoint: ["/bin/bash", "./entrypoint.sh"]
     image: node:10.12.0
     ports:
-      - "3001:3001"
+      - "4000:4000"
     volumes:
       - .:/home/app
     environment:

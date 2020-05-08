@@ -40,9 +40,11 @@ module.exports = {
     },
     async findAsync(id, callback) {
         const data = await Instructor.findOne({
+            attributes: ["id", "avatar_url", "name", "birth", "gender", "services", "created_at"],
             where: {
                id
-            }
+            },
+            
          }).then(function(instructor) {     
             if (!instructor) return undefined;      
             return instructor.dataValues;

@@ -45,7 +45,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         total_students: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            noUpdate : true,
+            noInsert : true
+
         }
     }, {});
         

@@ -68,4 +68,16 @@
                 value="{{member.height}}">
             </div>
         </div>
+
+        <div class="item">
+            <div>Instrutor</div>
+            <div>
+                <select name="instructor" id="instructor">
+                <option value="" selected >Selecione</option>
+                {% for instructor in instructorsOptions %}
+                    <option value="{{instructor.id}}" >{{ instructor.name }}</option>
+                {% endfor %}                    
+                </select>
+            </div>
+        </div>
          <button type="submit">Salvar</button>
