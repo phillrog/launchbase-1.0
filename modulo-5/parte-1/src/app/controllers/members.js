@@ -18,7 +18,7 @@ module.exports = {
         Member.findAsync(req.params.id, (member) => {
             if (!member) return res.send('Member not found');
             const { Instructor:{ dataValues:{ instructor_name} } } = member;
-            console.log(instructor_name);
+
             member.blood = typeBlood(member.blood);
             member.birth = date(member.birth).birthDay;
             member.created_at = (new Intl.DateTimeFormat("pt-BR")).format(member.created_at);

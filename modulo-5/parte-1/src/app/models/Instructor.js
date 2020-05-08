@@ -29,7 +29,7 @@ module.exports = {
                 
         })
         .then(function(instructor, err) {    
-            console.log(instructor);  
+
             return instructor;
          })
          .catch( error => {
@@ -108,5 +108,28 @@ module.exports = {
          });
 
          callback();
+    },
+    async findByAsync(filter,callback) {
+        let where = {
+            [Op.or]: { 
+                name: {[Op.like]: `%${filter}%`}, 
+                services: {[Op.like]: `%${filter}%`},
+                gender: {[Op.like]: `%${filter}%`}                
+             }
+        };
+
+        if (Date.parse(filter)) 
+            where['Op.or'].birth = {[Op.eq]: `${filter}`};
+
+        const data = await Instructor.findAll({
+            attributes: ["id", "avatar_url", "name", "birth", "gender", "services", "created_at"],
+            where
+            
+         }).then(function(instructor) {     
+            if (!instructor) return undefined;  
+
+            return instructor;
+         });
+         callback(data);
     }
 }

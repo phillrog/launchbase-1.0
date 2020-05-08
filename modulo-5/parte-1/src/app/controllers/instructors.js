@@ -4,9 +4,19 @@ const Instructor = require('../models/Instructor');
 
 module.exports = {
     index(req,res){
-        Instructor.allAsync((instructors) => {
-            return res.render('./instructors/index', { instructors });
-        });        
+        const {filter} = req.query;
+
+        if (filter) {
+            Instructor.findByAsync(filter,(instructors) => {
+                return res.render('./instructors/index', { instructors, filter });
+            });
+        } else 
+        {
+            Instructor.allAsync((instructors) => {
+                return res.render('./instructors/index', { instructors });
+            });
+        }      
+      
     },
     create(re,res){
         return res.render('./instructors/create');
