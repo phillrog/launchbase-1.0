@@ -33,9 +33,14 @@ services:
     volumes:
       - .:/home/app
     environment:
-      DB_HOST: postgres
+      - DB_USERNAME
+      - DB_PASSWORD
+      - DB_DATABASE
+      - DB_HOST
+      - DB_PORT
     depends_on:
       - postgres
+    env_file: .env
     networks:
       - postgres-network
 
