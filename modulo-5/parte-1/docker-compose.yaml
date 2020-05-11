@@ -33,11 +33,12 @@ services:
     volumes:
       - .:/home/app
     environment:
-      - DB_USERNAME
-      - DB_PASSWORD
-      - DB_DATABASE
-      - DB_HOST
-      - DB_PORT
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+      - DB_DATABASE=gymmanager
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - NODE_ENV=development
     depends_on:
       - postgres
     env_file: .env

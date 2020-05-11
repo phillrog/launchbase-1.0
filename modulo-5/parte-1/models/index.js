@@ -10,6 +10,8 @@ const db = {};
 
 let sequelize;
 if (env === 'development') {
+  sequelize = new Sequelize(config);
+} else {
   const confDev = {
     username: "postgres",
     password: "1234",
@@ -20,8 +22,6 @@ if (env === 'development') {
   };
 
   sequelize = new Sequelize(confDev);
-} else {
-  sequelize = new Sequelize(config);
 }
 fs
   .readdirSync(__dirname)
