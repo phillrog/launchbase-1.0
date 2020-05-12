@@ -3,8 +3,30 @@ const Intl = require("intl");
 const Member = require('../models/Member');
 
 module.exports = {
-    index(re,res){
-        Member.allAsync((members) => res.render('./members/index', { members }));        
+    index(req,res){
+        let {filter, page, limit} = req.query;
+
+        page = page || 1;
+        limit = limit || 2;
+
+        let offset = limit * (page -1);
+
+        const params = { 
+            filter, 
+            page, 
+            limit, 
+            offset,
+            callback(members ){
+                const pagination = {
+                    filter,
+                    total: members.length > 0 ? Math.ceil( members [0].total / limit) : 0,
+                    page
+                };
+
+                return res.render('./members/index', { members, pagination });
+            }
+        };
+        Member.paginateAsync(params);       
     },
     create(req,res){
         Member.instructorsSelectOptions(function(options){
@@ -34,7 +56,10 @@ module.exports = {
             member.birth = date(member.birth).iso;
             member.created_at = date(member.birth).iso;
             
-            return res.render('members/edit', { member });
+            Member.instructorsSelectOptions(function(options){
+            console.log(member)
+                return res.render('members/edit', {instructorsOptions : options, member });
+            });
         });   
     },
     put(req,res){

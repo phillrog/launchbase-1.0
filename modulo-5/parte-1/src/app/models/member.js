@@ -19,7 +19,20 @@ module.exports = {
     },
     async findAsync(id, callback) {
         const data = await Member.findOne({
-            where: {
+            attributes:[
+                "id",
+                "avatar_url",
+                "name",
+                "birth",
+                "gender",
+                "blood",
+                "height",
+                "weight",
+                "email",
+                "created_at",
+                "instructor_id"    
+            ],
+            where: {               
                id
             },
             include: [{
@@ -113,5 +126,74 @@ module.exports = {
         .then((instructors) =>  instructors);
 
         return callback(data);
+    },
+    
+    async findByAsync(filter,callback) {
+        let where = {
+            [Op.or]: { 
+                name: {[Op.like]: `%${filter}%`}, 
+                    
+             }
+        };
+        const data = await Instructor.findAll({
+            where
+            
+         }).then(function(member) {     
+            if (!member) return undefined;  
+
+            return member;
+         });
+         callback(data);
+    },
+    async paginateAsync(params) {
+        const {filter, limit, offset, callback} = params;
+
+        let where = {};
+        let whereSubquery = "";
+        if (filter){
+            where = {
+                [Op.or]: { 
+                    name: {[Op.like]: `%${filter}%`}, 
+                            
+                }
+            };
+
+            whereSubquery = `"Members"."name" like '%${filter}%'`;           
+
+            whereSubquery = "WHERE " + whereSubquery;
+        }   
+
+        console.log(limit, offset)
+
+        let find = {
+            order: [
+                'name',
+            ],
+            attributes: [
+                "id",
+                "avatar_url",
+                "name",
+                "birth",
+                "gender",
+                "blood",
+                "height",
+                "weight",
+                "email",
+                "created_at",              
+                [db.sequelize.literal(`(SELECT COUNT(*) FROM "Members" ${whereSubquery} )`), 'total']
+            ],                        
+            where,
+            limit,
+            offset,
+            subQuery:false         
+        };
+
+        const data = await Member.findAll(find).then((data) => {
+            if (!data) return undefined;  
+
+            return data;            
+        });
+
+        callback(data);
     }
 }

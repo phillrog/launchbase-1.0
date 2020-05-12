@@ -63,6 +63,13 @@ module.exports =  (sequelize, DataTypes) => {
                 model: 'Instructors',
                 key: 'id'
             }
+          },
+          total: {
+            type: DataTypes.INTEGER,
+              allowNull: true,
+              noUpdate : true,
+              noInsert : true
+
           }
     }, {});
 
