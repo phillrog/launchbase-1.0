@@ -131,5 +131,57 @@ module.exports = {
             return instructor;
          });
          callback(data);
+    },
+    async paginateAsync(params) {
+        const {filter, limit, offset, callback} = params;
+
+        let where = {};
+        if (filter){
+            where = {
+                [Op.or]: { 
+                    name: {[Op.like]: `%${filter}%`}, 
+                    services: {[Op.like]: `%${filter}%`},
+                    gender: {[Op.like]: `%${filter}%`}                
+                }
+            };
+
+            if (Date.parse(filter)) 
+                where['Op.or'].birth = {[Op.eq]: `${filter}`};
+        }   
+
+        console.log(limit, offset)
+
+        let find = {
+            order: [
+                'name',
+            ],
+            attributes: [
+                "id",
+                "avatar_url", 
+                "name", 
+                "birth", 
+                "gender", 
+                "services", 
+                "created_at",
+                [db.sequelize.cast( db.sequelize.fn('COUNT', db.sequelize.col('Members.*')), 'INTEGER'), 'total_students'],
+            ],
+            include: [{
+                model: Member,
+                attributes: []
+            }],
+            group: [db.sequelize.col('Instructors.id')],
+            where,
+            limit,
+            offset,
+            subQuery:false         
+        };
+
+        const data = await Instructor.findAll(find).then((data) => {
+            if (!data) return undefined;  
+
+            return data;            
+        });
+
+        callback(data);
     }
 }

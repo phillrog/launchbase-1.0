@@ -4,19 +4,23 @@ const Instructor = require('../models/Instructor');
 
 module.exports = {
     index(req,res){
-        const {filter} = req.query;
+        let {filter, page, limit} = req.query;
 
-        if (filter) {
-            Instructor.findByAsync(filter,(instructors) => {
+        page = page || 1;
+        limit = limit || 2;
+
+        let offset = limit * (page -1);
+
+        const params = { 
+            filter, 
+            page, 
+            limit, 
+            offset,
+            callback(instructors ){
                 return res.render('./instructors/index', { instructors, filter });
-            });
-        } else 
-        {
-            Instructor.allAsync((instructors) => {
-                return res.render('./instructors/index', { instructors });
-            });
-        }      
-      
+            }
+        };
+        Instructor.paginateAsync(params);        
     },
     create(re,res){
         return res.render('./instructors/create');
