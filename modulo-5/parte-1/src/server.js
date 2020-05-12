@@ -22,7 +22,7 @@ db.sequelize.sync()
     });
 
 db.Members.belongsTo(db.Instructors, {foreignKey: 'instructor_id'});
-db.Instructors.hasMany(db.Members, {foreignKey: 'instructor_id'})
+db.Instructors.hasMany(db.Members, {foreignKey: 'instructor_id'});
 
 nunjucks.configure("src/app/views", {
     express: server,

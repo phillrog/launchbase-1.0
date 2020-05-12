@@ -49,6 +49,13 @@ module.exports = (sequelize, DataTypes) => {
             noUpdate : true,
             noInsert : true
 
+        },
+        total: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            noUpdate : true,
+            noInsert : true
+
         }
     }, {});
         

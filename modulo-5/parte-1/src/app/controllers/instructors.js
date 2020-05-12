@@ -17,7 +17,13 @@ module.exports = {
             limit, 
             offset,
             callback(instructors ){
-                return res.render('./instructors/index', { instructors, filter });
+                const pagination = {
+                    filter,
+                    total: instructors[0].total,
+                    page
+                };
+
+                return res.render('./instructors/index', { instructors, pagination });
             }
         };
         Instructor.paginateAsync(params);        

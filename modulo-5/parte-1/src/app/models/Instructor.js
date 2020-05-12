@@ -164,11 +164,16 @@ module.exports = {
                 "services", 
                 "created_at",
                 [db.sequelize.cast( db.sequelize.fn('COUNT', db.sequelize.col('Members.*')), 'INTEGER'), 'total_students'],
+                [db.sequelize.literal(`(SELECT COUNT(*) FROM "Instructors" WHERE )`, 'total'],
             ],
+            
+            
             include: [{
-                model: Member,
-                attributes: []
-            }],
+                    model: Member,
+                    attributes: [],
+                    required: false,
+                }
+            ],
             group: [db.sequelize.col('Instructors.id')],
             where,
             limit,
