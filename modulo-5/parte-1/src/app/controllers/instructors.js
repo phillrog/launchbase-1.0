@@ -17,9 +17,10 @@ module.exports = {
             limit, 
             offset,
             callback(instructors ){
+                console.log(instructors)
                 const pagination = {
                     filter,
-                    total: instructors[0].total,
+                    total: instructors.length > 0 ? Math.ceil( instructors [0].total / limit) : 0,
                     page
                 };
 

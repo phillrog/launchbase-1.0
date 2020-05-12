@@ -136,6 +136,7 @@ module.exports = {
         const {filter, limit, offset, callback} = params;
 
         let where = {};
+        let whereSubquery = "";
         if (filter){
             where = {
                 [Op.or]: { 
@@ -145,8 +146,11 @@ module.exports = {
                 }
             };
 
-            if (Date.parse(filter)) 
-                where['Op.or'].birth = {[Op.eq]: `${filter}`};
+            whereSubquery = `"Instructors"."name" like '%${filter}%' OR 
+            "Instructors"."services" like '%${filter}%' OR  
+            "Instructors"."services" like '%${filter}%' `;           
+
+            whereSubquery = "WHERE " + whereSubquery;
         }   
 
         console.log(limit, offset)
@@ -164,7 +168,7 @@ module.exports = {
                 "services", 
                 "created_at",
                 [db.sequelize.cast( db.sequelize.fn('COUNT', db.sequelize.col('Members.*')), 'INTEGER'), 'total_students'],
-                [db.sequelize.literal(`(SELECT COUNT(*) FROM "Instructors" WHERE )`, 'total'],
+                [db.sequelize.literal(`(SELECT COUNT(*) FROM "Instructors" ${whereSubquery} )`), 'total']
             ],
             
             
