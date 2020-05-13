@@ -6,7 +6,7 @@
                 <h2>COMPRA E VENDA</h2>
             </div>
         </a>
-        <form action="/products/search" method="get">
+        <form class="search" action="/products/search" method="get">
             <input type="text" name="filter" id="filter" placeholder="Buscar por Produtos"
                {% if search.term %}
                value={{search.term}}
@@ -25,7 +25,7 @@
                 <li>
                     <a href="/accounts">
                         <i class="material-icons">account_circle</i>
-                        MMinha Conta
+                        Minha Conta
                     </a>
                 </li>
             </ul>
