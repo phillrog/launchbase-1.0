@@ -1,6 +1,9 @@
 'use strict';
-module.exports = (DataTypes, DataTypes) => {
-  const Products = DataTypes.define('Products', {
+
+const sequelize = require('./index');
+
+module.exports = (sequelize, DataTypes) => {
+  const Products = sequelize.define('Products', {
     id: {
       allowNull: false,
       autoIncrement: true,
