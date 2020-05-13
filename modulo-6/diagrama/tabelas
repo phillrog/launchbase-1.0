@@ -1,0 +1,27 @@
+// https://dbdiagram.io/
+table products {
+  id int [pk, increment]
+  category_id int [unique]
+  user_id int [unique]
+  name text
+  description text
+  old_price decimal
+  price decimal
+  quantity decimal
+  status int 
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+table categories {
+  id int [pk, increment]
+  name text 
+}
+
+table files {
+  id int [pk, increment]
+  name text
+  path text
+}
+
+Ref: "products"."category_id" < "categories"."id"
