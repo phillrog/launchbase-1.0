@@ -8,10 +8,6 @@ WORKDIR /home/app
 
 COPY package.json /home/app/
 
-RUN npm install
-RUN npm install sequelize
-RUN npm install sequelize-cli
-
 COPY . /home/app
 
 CMD [ "npm", “run”, "install" ]

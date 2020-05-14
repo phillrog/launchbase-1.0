@@ -40,7 +40,7 @@ services:
       - DB_PORT=5432
       - NODE_ENV=development
     depends_on:
-      - postgres
+      - pgadmin
     env_file: .env
     networks:
       - postgres-network

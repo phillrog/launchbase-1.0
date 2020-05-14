@@ -15,7 +15,7 @@ if (env === 'development') {
   const confDev = {
     username: "postgres",
     password: "1234",
-    database: "gymmanager",
+    database: "launchstoredb",
     host: "localhost",
     dialect: 'postgres',
     port: 15432
