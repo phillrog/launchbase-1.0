@@ -2,8 +2,8 @@ const db = require("../../../models");
 const Categories = db.Categories;
 
 module.exports = {
-    async allAsync() {
-        return await Categories.findAll({
+    allAsync() {
+        return Categories.findAll({
             order: [
                 'name'
             ]

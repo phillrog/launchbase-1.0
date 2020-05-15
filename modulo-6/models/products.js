@@ -13,12 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     category_id: {
       allowNull: false,
-      unique: true,
       type: DataTypes.INTEGER
     },
     user_id: {
       allowNull: false,
-      unique: true,
       type: DataTypes.INTEGER
     },
     name: {
@@ -47,16 +45,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     createdAt: {
       type: DataTypes.DATE,      
-      defaultValue: DataTypes.NOW
+      defaultValue: sequelize.fn('now'), 
     },    
     updatedAt: {
         allowNull: true,
-        type: DataTypes.DATE,      
-        field: 'updated_at'
+        type: DataTypes.DATE, 
+        defaultValue: sequelize.fn('now'),   
     }
   }, {});
-  Products.associate = function(models) {
-    // associations can be defined here
+  Products.associate = models => {
+    Products.belongsTo(models.Categories, {foreignKey: 'category_id'});
   };
   return Products;
 };

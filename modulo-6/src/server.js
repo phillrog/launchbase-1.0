@@ -31,6 +31,7 @@ const port = 5000 || server.port;
 
 
 
+
 server.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`)
 })

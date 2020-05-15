@@ -1,22 +1,27 @@
 const Categories = require('../models/Categories');
+const Products = require('../models/Products');
 
 module.exports = {
-    create(req, res) {
+   async create(req, res) {
 
-        Categories.allAsync()
-        .then((categories) => { 
-
-            return res.render('products/create.njk', {categories})
-        })
-        .catch((error) => { throw new Error(error) });
-        
+      const categories = await Categories.allAsync();
+      
+      return res.render('products/create.njk', {categories});
     },
-    post(req, res) {
-        return res.render('products/create.njk')
-    },
-    async categoriesSelectOptions(callback){
-        
+    async post(req, res) {
+        const keys = Object.keys(req.body);
 
-        return data;
+        for (const key of keys) {
+            if (req.body[key] == "") {
+                return res.send("Please fill all fields");
+            }
+        }
+
+        let results = await Products.create(req.body);
+        product = results.dataValues;
+        results = await Categories.allAsync();  
+        const categories = results;
+
+        return res.render('products/create.njk', { product, categories } );
     },
 }

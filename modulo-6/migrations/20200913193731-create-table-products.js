@@ -13,12 +13,16 @@ module.exports = {
         },
         category_id: {
           allowNull: false,
-          unique: true,
-          type: Sequelize.INTEGER
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Categories',
+            key: 'id', 
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
         },
         user_id: {
           allowNull: true,
-          unique: true,
           type: Sequelize.INTEGER
         },
         name: {
