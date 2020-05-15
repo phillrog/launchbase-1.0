@@ -12,20 +12,28 @@ module.exports = {
             name, 
             description, 
             old_price, 
-            price, 
+            
             quantity,
             status
         } = data;
- 
+        let price = data.price.replace(/\D/g, '');
+
         return Products.create({
                 category_id, 
-                user_id: 1, 
+                user_id: user_id || 1, 
                 name, 
                 description, 
-                old_price, 
+                old_price: old_price || price, 
                 price, 
                 quantity,
-                status
+                status: status || 1 
             });
     },
+
+    find(id) {
+        const data = Products.findOne({            
+            where: {id}
+        })
+        return data;
+    }
 }

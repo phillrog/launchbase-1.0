@@ -25,8 +25,8 @@
     <div>
         <textarea type="text" name="description" id="description"
         placeholder="Descrição do Anúncio"
-        value="{{product.description}}"
-        ></textarea>
+        
+        >{{product.description}}</textarea>
     </div>
 </div>
 
@@ -37,7 +37,7 @@
     <div>
         <input type="text" name="price" id="price"
         placeholder="Preço do Produto"
-        value="{{product.description}}"
+        value="{{product.price}}"
         onkeydown="Mask.apply(this, 'formatBRL');"
         >
     </div>
