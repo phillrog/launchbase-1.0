@@ -43,7 +43,8 @@ module.exports = {
                 "old_price",
                 "price", 
                 "quantity",
-                "status"
+                "status",
+                "updatedAt"
             ],
             include : [
                 {

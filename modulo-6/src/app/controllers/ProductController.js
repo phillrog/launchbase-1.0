@@ -1,7 +1,7 @@
 const Categories = require('../models/Categories');
 const Products = require('../models/Products');
 const Files = require('../models/Files');
-const {formatPrice} = require('../../lib/utils');
+const {formatPrice, date} = require('../../lib/utils');
 
 module.exports = {
     async create(req, res) {
@@ -113,6 +113,20 @@ module.exports = {
         res.redirect('/products');
     },
     async show(req, res) {
-        return res.render("products/show");
+        let results = await Products.find(req.params.id);
+        const product = results.dataValues;
+        console.log(product)
+        if (!product) return res.send('Product not found!');
+
+        const { day, hour, minutes, month } = date(product.updatedAt);
+        product.published = { 
+            day: `${day}/${month}`,
+            hour: `${hour}h${minutes}`
+        };
+
+        product.oldPrice = formatPrice(product.old_price);
+        product.price = formatPrice(product.price);
+
+        return res.render("products/show.njk", { product });
     }
 }
