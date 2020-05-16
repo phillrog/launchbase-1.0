@@ -1,5 +1,6 @@
 const db = require("../../../models");
 const Products = db.Products;
+const Files = db.Files;
 const { date } = require('../../lib/utils');
 const Intl = require("intl");
 
@@ -32,7 +33,23 @@ module.exports = {
 
     find(id) {
         const data = Products.findOne({            
-            where: {id}
+            where: {id},
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status"
+            ],
+            include : [
+                {
+                    model : Files 
+                }
+            ]
         })
 
         return data;

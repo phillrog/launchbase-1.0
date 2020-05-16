@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     product_id: {
       type: DataTypes.INTEGER,
-      unique: true
+      unique: false
     },
     createdAt: {
       type: DataTypes.DATE,      
@@ -30,9 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,      
         defaultValue: DataTypes.NOW
     }
-  }, {});
+  }, {
+    underscored: true
+  });
   Files.associate = function(models) {
-    Files.hasOne(models.Products, {foreignKey: 'product_id'});
+    Files.belongsTo(models.Products, { foreignKey : "product_id"});
   };
   return Files;
 };

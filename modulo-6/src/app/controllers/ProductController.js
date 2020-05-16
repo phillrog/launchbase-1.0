@@ -23,14 +23,16 @@ module.exports = {
             return res.send('Please, seand at least one image');
         }
         
-
+        //save product
         let results = await Products.create(req.body);
         product = results.dataValues;
+
+        //get categories
         results = await Categories.allAsync();  
         const categories = results;
 
+        // save files
         const filesPromises = req.files.map(file => Files.create({...file, product_id: product.id }));
-
         await Promise.all(filesPromises);
 
         return res.redirect(`/products/${product.id}`);
@@ -47,8 +49,15 @@ module.exports = {
         console.log(product.old_price)
         results = await Categories.allAsync();  
         const categories = results;
+        
+        let files = product.Files.map(file => file.dataValues);
 
-        return res.render('products/edit.njk', {product, categories});
+        files = files.map((file) => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+        }))
+
+        return res.render('products/edit.njk', {product, categories, files});
 
     },
     async put(req, res) {
