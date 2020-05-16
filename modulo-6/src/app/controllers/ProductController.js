@@ -1,9 +1,10 @@
 const Categories = require('../models/Categories');
 const Products = require('../models/Products');
+const Files = require('../models/Files');
 const {formatPrice} = require('../../lib/utils');
 
 module.exports = {
-   async create(req, res) {
+    async create(req, res) {
 
       const categories = await Categories.allAsync();
       
@@ -18,10 +19,19 @@ module.exports = {
             }
         }
 
+        if (req.files.length == 0){
+            return res.send('Please, seand at least one image');
+        }
+        
+
         let results = await Products.create(req.body);
         product = results.dataValues;
         results = await Categories.allAsync();  
         const categories = results;
+
+        const filesPromises = req.files.map(file => Files.create({...file, product_id: product.id }));
+
+        await Promise.all(filesPromises);
 
         return res.redirect(`/products/${product.id}`);
     },

@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Files.associate = function(models) {
-    // associations can be defined here
+    Files.hasOne(models.Products, {foreignKey: 'product_id'});
   };
   return Files;
 };
