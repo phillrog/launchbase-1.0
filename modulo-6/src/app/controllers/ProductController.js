@@ -112,4 +112,7 @@ module.exports = {
 
         res.redirect('/products');
     },
+    async show(req, res) {
+        return res.render("products/show");
+    }
 }
