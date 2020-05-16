@@ -5,8 +5,8 @@ const multer = require('./app/middlewares/multer');
 
 routes.get('/', (req, res) => res.render("layout.njk"));
 
-routes.get('/products/:id', ProductController.show );
 routes.get('/products/create',ProductController.create );
+routes.get('/products/:id', ProductController.show );
 routes.get('/products/:id/edit',ProductController.edit );
 
 routes.post('/products', multer.array('photos', 6),ProductController.post );
