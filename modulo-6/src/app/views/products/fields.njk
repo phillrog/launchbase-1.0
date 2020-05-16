@@ -30,8 +30,6 @@
     </div>
 </div>
 
-{# Campo de foto #}
-
 <div class="item">
     <div>Valor</div>
     <div>
@@ -42,7 +40,7 @@
         >
     </div>
     {% if product.old_price %}
-    <input type="hidden" name="old_price" value={{product.old_price}}>
+    <input type="hidden" name="old_price" id="old_price" value={{product.old_price}}>
     {% endif %}
 </div>
 
@@ -51,20 +49,20 @@
     <div>Quantidade</div>
         <div><input type="number" name="quantity" id="quantity"
         placeholder="Estoque Disponível"
-        value="{{product.quantity}}"
+        value={{product.quantity}}
         ></div>
     </div>
 </div>
-{% if product.status %}
+{% if (product.status == '1') or (product.status == '0') %}
     <div class="item">
         <div>Dsiponível</div>
         <div>
             <span><input type="radio" name="status" checked 
-            value="M" {% if member.gender == "1" %}
+            {% if product.status == "1" %} value="1"
             checked
             {% endif %}>Sim</span>
             <span><input type="radio" name="status" value="0"
-            {% if member.gender == "0" %}
+            {% if product.status == "0" %}
             checked
             {% endif %}
             >Não</span>
