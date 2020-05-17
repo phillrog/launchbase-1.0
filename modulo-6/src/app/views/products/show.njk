@@ -3,12 +3,19 @@
 {% block content %}
 <section class="product-single container" >
     <div class="gallery">
-        <div class="highlight">
+        <div class="hightlight">
             {% if not files[0] %}
                 <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO">
             {% else %}
                 <img src="{{files[0].src}}" alt="{{files[0].name}}">
             {% endif %}
+
+            <div class="lightbox-target">
+                <img src="{{files[0].src}}" alt="{{files[0].name}}">
+                <a href="#" class="lightbox-close">
+                    <i class="material-icons">close</i>
+                </a>
+            </div>
         </div>
         <div class="gallery-preview">
             {% for image in files %}

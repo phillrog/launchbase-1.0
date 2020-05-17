@@ -120,7 +120,7 @@ const PhotosUpload = {
 };
 
 const ImageGallery = {
-    hightlight: document.querySelector('.gallery .highlight > img'),
+    hightlight: document.querySelector('.gallery .hightlight > img'),
     previews: document.querySelectorAll('.gallery-preview img'),
     setImage(event) {
         const { target } = event;
