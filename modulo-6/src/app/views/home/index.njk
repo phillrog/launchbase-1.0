@@ -8,18 +8,18 @@
             <div class="product">
                 <div class="image"
                     {% if product.img %}
-                        style="background: url('{{product.img}}');"
+                        style="background-image: url('{{product.img}}');"
                     {% else %}
-                        style="background: url('//placehold.it/500x500?text=Produto sem imagem');"
+                        style="background-image: url('//placehold.it/500x500?text=PRODUTO SEM FOTO');"
                     {% endif %}
                 >
+                </div>
                 {% if product.price  != product.oldPrice %}
-                <p>{{product.oldPrice}}</p>
+                <p class="old-price">{{product.oldPrice}}</p>
                 {% endif %}
-                <p>{{product.price}}</p>
+                <p class="price">{{product.price}}</p>
                 <h4>{{product.name}}</h4>
                 <a href="/products/{{product.id}}" class="button">Ver Produto</a>
-                </div>
 
             </div>
         {% endfor %}
