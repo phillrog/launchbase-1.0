@@ -46,7 +46,7 @@ module.exports = {
         
         product.price = formatPrice(product.price);
         product.old_price = formatPrice(product.old_price);
-        console.log(product.old_price)
+
         results = await Categories.allAsync();  
         const categories = results;
         
@@ -115,7 +115,6 @@ module.exports = {
     async show(req, res) {
         let results = await Products.find(req.params.id);
         const product = results.dataValues;
-        console.log(product)
         if (!product) return res.send('Product not found!');
 
         const { day, hour, minutes, month } = date(product.updatedAt);

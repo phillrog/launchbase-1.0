@@ -33,6 +33,9 @@ module.exports = {
         }
 
         results = await Products.search(params);
+
+        console.log(results);
+
         const products = results.map(prod => prod.dataValues);
         const productsPromise = products.map(async (prod) => {
             prod.img = await getImage(prod.id);
@@ -45,10 +48,24 @@ module.exports = {
 
         const search = {
             term: req.query.filter,
-            total: products.total
+            total: products.length
         }
+        
+        const categories = products.map( product =>( {
+            id: product.category_id,
+            name: product.Cat.name
+        })).reduce(
+            (categoriesFiltered, category) => {
+                const found = categoriesFiltered.some(cat => cat.id == category.id);
 
-        return res.render("search/index.njk", {products});
+                if ( !found)
+                    categoriesFiltered.push(category);
+                    
+                return categoriesFiltered
+            }, []
+        );
+
+        return res.render("search/index.njk", {products, search, categories});
     },
     
 }

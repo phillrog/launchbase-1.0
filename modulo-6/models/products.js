@@ -52,9 +52,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE, 
         defaultValue: sequelize.fn('now'),   
     }
-  }, {});
+  },  {
+    tableName: 'Products',
+    underscored: false
+  });
   Products.associate = models => {
-    Products.belongsTo(models.Categories, {foreignKey: 'category_id'});
+    
+    Products.belongsTo(models.Categories , {  as: 'Cat', foreignKey: 'category_id'});
     Products.hasMany(models.Files)
   };
   return Products;

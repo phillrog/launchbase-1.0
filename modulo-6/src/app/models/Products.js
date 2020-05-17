@@ -155,14 +155,25 @@ module.exports = {
             ],
             include : [
                 {
+                    required: false,
                     model : Files 
                 },
                 {
-                    model : Categories
+                    attibutes: [
+                        "id",
+                        "name"
+                    ],
+                    required: false,
+                    model : Categories,
+                    as: 'Cat'
                 }
             ],
+            as: "Products",
             order: ['updatedAt'],
-            group: [db.sequelize.col('Products.id'), db.sequelize.col('Categories.name')],
+            group: [
+                db.sequelize.col('Products.id'), 
+                db.sequelize.col('Files.id'),
+                db.sequelize.col('Cat.id')],
             subQuery:false  
         });
     }

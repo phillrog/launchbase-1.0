@@ -9,6 +9,18 @@ Curso rocketseat launchbase 1.0
 - Também foi utilizado multer como middleware de upload dos arquivos.
 - Foi visto uma funcionalidade do nunkucks Macros. Que possibilida criar funções nunjuck e aplicar no dentro de uma página configurando um layout conforme seus parâmetros.
 
-![conexao]()
+
 
 # Resultado
+
+- Home
+![tela](https://image.prntscr.com/image/F9BL6-ghQDSGez3xYVOvXw.png)
+
+- Detalhes
+![detalhes](https://image.prntscr.com/image/OKxjBmTTR-iPA9I98e4z2g.png)
+
+- Edição 
+![edica](https://image.prntscr.com/image/DN0hiK_URVKjWWscn7QLJQ.png)
+
+- Resultado das buscas
+![resultado](https://image.prntscr.com/image/9i2GIe33SJqVKUCvS8d5JA.png)
