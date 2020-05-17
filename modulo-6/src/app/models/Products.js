@@ -89,5 +89,27 @@ module.exports = {
                 id
             }
         })
+    },
+    all(){
+        return Products.findAll({            
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updatedAt"
+            ],
+            include : [
+                {
+                    model : Files 
+                }
+            ],
+            order: ['updatedAt']
+        });
     }
 }
