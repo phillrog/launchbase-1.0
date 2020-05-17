@@ -31,7 +31,7 @@ module.exports = {
 
         await Promise.all(imgPromises);
 
-        res.render("home/index.njk", {products});
+        return res.render("home/index.njk", {products});
     },
     
 }
