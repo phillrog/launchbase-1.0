@@ -127,6 +127,14 @@ module.exports = {
         product.oldPrice = formatPrice(product.old_price);
         product.price = formatPrice(product.price);
 
-        return res.render("products/show.njk", { product });
+
+        let files = product.Files.map(file => file.dataValues);
+
+        files = files.map((file) => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+        }))
+
+        return res.render("products/show.njk", { product, files });
     }
 }
