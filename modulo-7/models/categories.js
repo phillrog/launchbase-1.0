@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW
     }
   }, {
+    tableName: 'Categories',
     underscored: true
   });
   Categories.associate = function(models) {

@@ -5,7 +5,7 @@ module.exports = {
     
       return queryInterface.bulkInsert('Users', [{       
         name: "Phillipe",
-        email: "phillrog@hotmal.com",
+        email: "phillrog@hotmail.com",
         password: "1234",
         cpf_cnpj: '94352268097',
         cep: '14270-000',

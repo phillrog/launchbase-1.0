@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.NOW
     }
   }, {
+    tableName: 'Files',
     underscored: true
   });
   Files.associate = function(models) {
