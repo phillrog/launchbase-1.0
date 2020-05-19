@@ -180,11 +180,13 @@ const Validate = {
 
         input.value = results.value;
 
+        Validate.clearErrors(input);
+
         if (results.error)
             Validate.displayError(input, results.error);
     },
     displayError(input, error) {
-        Validate.clearErrors(input);
+        
         const div = document.createElement('div');
 
         div.classList.add('error');
@@ -208,6 +210,38 @@ const Validate = {
         if (!value.match(mailFormat))
             error = "E-mail inválido";
             
+        return {
+            error,
+            value
+        }
+    },
+    isCpfCnpj(value) {
+        let error = null;
+
+        const cleanValues = value.replace(/\D/g,"");
+
+        if (cleanValues.length > 11 && cleanValues.length !== 14) {
+            error = "Cnpj incorreto";
+        }
+        else if (cleanValues.length < 12 && cleanValues.length !== 11)
+        {
+            error = "Cpf incorreto"; 
+        }
+
+        return {
+            error,
+            value
+        }
+    },
+    isCep(value) {
+        let error = null;
+
+        const cleanValues = value.replace(/\D/g,"");
+
+        if (cleanValues.length !== 8) {
+            error = "CEP incorreto";
+        }
+
         return {
             error,
             value
