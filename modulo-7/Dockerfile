@@ -1,13 +1,20 @@
-FROM node:10.15.0-alpine
-EXPOSE 3000 9229
+FROM node
+EXPOSE 4000 4000
+
+WORKDIR /home/app
 
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
-WORKDIR /home/app
+COPY ./package.json /home/app/
 
-COPY package.json /home/app/
+RUN npm install --no-optional && npm cache clean --force
 
-COPY . /home/app
+RUN npm install decamelize
+RUN npm install -g pg
+RUN npm install -g sequelize
+RUN npm install -g sequelize-cli
 
-CMD [ "npm", “run”, "install" ]
+COPY . .
+
+RUN chmod 777 /home/app/entrypoint.sh

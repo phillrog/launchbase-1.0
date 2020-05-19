@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addConstraint('Files', ["product_id"],{
-      type: Sequelize.INTEGER,
+      type: 'FOREIGN KEY',
       name: 'product_id_fk_files',
       references: { 
         table: 'Products',

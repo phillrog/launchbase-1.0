@@ -26,7 +26,7 @@ module.exports = {
       },
       cpf_cnpj: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
         unique: true
       },
       cep: {
@@ -46,7 +46,7 @@ module.exports = {
       }
     });
 
-    return 
+    return Users;
   },
 
   down: (queryInterface, Sequelize) => {
@@ -57,5 +57,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
+    return queryInterface.dropTable('Users');
   }
 };
