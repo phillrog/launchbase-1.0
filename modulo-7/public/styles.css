@@ -189,6 +189,7 @@ form .item > div:nth-child(1) {
     margin-bottom: 8px;
 }
 
+form .item .input input,
 form .item input[type="text"],
 form .item input[type="number"],
 form .item textarea,
@@ -586,3 +587,17 @@ input[type=radio]::after {
     font-weight: bold;
     
 } 
+
+/* === USER-REGISTER === */
+
+.user-register.container.form {
+    max-width: 500px;
+}
+
+.form input[name="cep"],
+.form input[name="email"],
+.form input[name="password"],
+.form input[name="passwordRepeat"],
+.form input[name="cpf_cnpj"] {
+    max-width: 60%;
+}

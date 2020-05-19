@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,      
         defaultValue: DataTypes.NOW
     }
-  }, {});
+  }, {
+    underscored: true
+  });
   Categories.associate = function(models) {
 
   };
