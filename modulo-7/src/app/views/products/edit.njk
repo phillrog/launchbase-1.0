@@ -20,5 +20,7 @@
             <button class="button delete" type="submit">Deletar</button>
         </form>
 </section>
-{% include '../confirmation.njk' %}}
+
+{% import "../confirmation.njk" as util %}
+{{ util.message('Deseja deletar ?') }}
 {% endblock content %}

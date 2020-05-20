@@ -22,8 +22,12 @@
 <div class="item">
     <div>Senha</div>
         <div class="input"><input type="password" name="password" id="password"
-        placeholder="Escolha uma senha segura"
-        value="{{user.password}}"
+        {% if not user.id %}
+            placeholder="Escolha uma senha segura"
+        {% else %}
+            placeholder="Digite sua senha para atualizar seu cadastro"
+        {% endif %}
+        
         ></div>
     </div>
 </div>
@@ -34,7 +38,7 @@
     <div>Repetir Senha</div>
         <div class="input"><input type="password" name="passwordRepeat" id="Repeat"
         placeholder="Repita a senha escolhida"
-        value="{{user.password}}"
+        
         ></div>
     </div>
 </div>

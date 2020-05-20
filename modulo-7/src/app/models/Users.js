@@ -17,6 +17,13 @@ module.exports = {
             ]
         });
     },
+    findById(id) {
+        return Users.findOne({
+            where: {
+                id
+            }
+        });
+    },
     async create(data) {
         const {         
             name, 
