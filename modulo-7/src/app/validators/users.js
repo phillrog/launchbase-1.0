@@ -1,6 +1,6 @@
 const Users = require('../models/Users');
 
-const post = async (req, res) => {
+const post = async (req, res, next) => {
     const keys = Object.keys(req.body);
 
     for (const key of keys) {
@@ -16,7 +16,7 @@ const post = async (req, res) => {
     let cpf_cnpj = req.body.cpf_cnpj.replace(/\D/g,'');
 
     const user = await Users.findOne({email, cpf_cnpj});
-
+    
     if (user) 
         return res.render('users/register', {
             user: req.body,
@@ -28,6 +28,7 @@ const post = async (req, res) => {
             user: req.body,
             error: 'A senha e a repetição da senha estão incorretas.'
         });
+    next();
 };
 
 module.exports = { post };
