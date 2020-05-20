@@ -44,5 +44,28 @@ module.exports = {
                 cep,
                 address
             });
+    },
+    async update(data) {
+        const {   
+            id,      
+            name, 
+            email, 
+            cpf_cnpj,
+            cep,
+            address
+        } = data;
+            
+
+        return Users.update({
+                name: name, 
+                email: email, 
+                cpf_cnpj: cpf_cnpj,
+                cep: cep,
+                address: address
+            },{
+                where: {
+                    id
+            }}
+            );
     }
 }

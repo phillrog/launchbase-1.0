@@ -8,17 +8,10 @@ module.exports = {
         return res.render('users/register.njk');
     },
     async show(req, res) {
-        const {userId: id} = req.session;
-
-        const user = await Users.findById(id);
-        
-        if (!user) return res.render('user/register', {
-            error: "Usuário não encontrado"
-        });
+        const {user} = req;
 
         user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj);
         user.cep = formatCep(user.cep);
-
 
         return res.render('users/index', {user});
     },
@@ -27,10 +20,10 @@ module.exports = {
         const {  name, 
             email, 
             password,             
-            cep,
             address } = req.body;
 
         const cpf_cnpj = req.body.cpf_cnpj.replace(/\D/g,"") ;
+        const cep = req.body.cep.replace(/\D/g,"") ;
 
         const result = await Users.create({name, 
             email, 
@@ -45,5 +38,37 @@ module.exports = {
 
         return res.redirect('/users');
     },
+    async update(req,res){
+
+        try {
+            const {  
+                id,
+                name, 
+                email,             
+                address } = req.body;
+    
+            const cpf_cnpj = req.body.cpf_cnpj.replace(/\D/g,"") ;
+            const cep = req.body.cep.replace(/\D/g,"") ;
+
+            const result = await Users.update({
+                id,
+                name, 
+                email,            
+                cep,
+                address ,
+                cpf_cnpj});
+            
+            return res.render('users/index', {
+                success: 'Conta atualizada com sucesso!',
+                user: req.body
+            });
+
+        } catch (error) {
+            console.error(error);
+            return res.render('users/index', {
+                error: 'Algum erro aconteceu!'
+            })
+        }
+    }
     
 }
