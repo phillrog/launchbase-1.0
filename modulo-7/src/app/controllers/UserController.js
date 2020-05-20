@@ -25,6 +25,9 @@ module.exports = {
             address ,
             cpf_cnpj});
 
+        
+        req.session.userId = user.dataValues.id;
+        console.log(req.session);
         return res.redirect('/users');
     },
     
