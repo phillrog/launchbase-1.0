@@ -66,6 +66,5 @@ module.exports = {
         );
 
         return res.render("search/index.njk", {products, search, categories});
-    },
-    
+    }
 }
