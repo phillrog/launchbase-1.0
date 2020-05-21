@@ -8,6 +8,13 @@ const session = require('./config/session');
 const server = express();
 
 server.use(session(db.sequelize));
+server.use((req, res, next) => {
+    //variavel global disponivel em todo o template nunjuck
+    if (res.locals)
+        res.locals.session = req.session ? req.session : undefined;
+
+    next();
+});
 server.use(express.urlencoded({extended: true}));
 server.use(express.static('public'));
 server.use(methodOverride('_method'));

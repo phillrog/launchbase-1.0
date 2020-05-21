@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     data: {
       type: DataTypes.TEXT
     }
-  }, {});
+  }, {
+    tableName: 'Session'
+  });
   Session.associate = function(models) {
     // associations can be defined here
   };
