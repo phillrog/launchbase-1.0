@@ -52,7 +52,9 @@ module.exports = {
             email, 
             cpf_cnpj,
             cep,
-            address
+            address,
+            reset_token,
+            reset_token_expires
         } = data;
             
 
@@ -61,7 +63,9 @@ module.exports = {
                 email: email, 
                 cpf_cnpj: cpf_cnpj,
                 cep: cep,
-                address: address
+                address: address,
+                reset_token,
+                reset_token_expires
             },{
                 where: {
                     id

@@ -4,13 +4,15 @@ const { compare } = require('bcryptjs');
 const login = async(req, res, next) => {
     const { email, password} = req.body;
 
-    const user = await Users.findOne({email});
+    const results = await Users.findOne({email});   
     
-    if (!user) return res.render('session/login', {
+    if (!results) return res.render('session/login', {
         user: req.body,
         error: "Usuário não encontrado"
     });
     
+    const user = results.dataValues;
+
     const passed = await compare(password, user.password);
 
     if (!passed) 
@@ -30,14 +32,16 @@ const forgot = async (req, res, next) => {
     const {email} = req.body;
 
     try {
-        let user = await Users.findOne({email});
+        let results = await Users.findOne({email});
 
-        if (!user) 
+        if (!results) 
             return res.render("session/forgot-password",
                   {
                       user: req.body,
                       error: "Email não cadastrado!"
                   });
+
+        const user = results.dataValues;
 
         req.user = user;
         
@@ -50,12 +54,14 @@ const forgot = async (req, res, next) => {
 const reset = async  (req, res, next) => {
     const { email, password, passwordRepeat, token} = req.body;
 
-    const user = await Users.findOne({email});
+    const results = await Users.findOne({email});    
     
-    if (!user) return res.render('session/password-reset', {
+    if (!results) return res.render('session/password-reset', {
         user: req.body,
         error: "Usuário não encontrado"
     });
+
+    const user = results.dataValues;
         
     if (password != passwordRepeat) 
         return res.render('session/password-reset', {

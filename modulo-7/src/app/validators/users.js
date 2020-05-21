@@ -17,11 +17,13 @@ const checkAllFields = (body) => {
 const show = async(req, res, next) => {
     const {userId: id} = req.session;
 
-    const user = await Users.findById(id);
+    const results = await Users.findById(id);
     
-    if (!user) return res.render('users/register', {
+    if (!results) return res.render('users/register', {
         error: "Usuário não encontrado"
     });
+
+    const user = results.dataValues;
 
     req.user = user ;
 
@@ -37,13 +39,15 @@ const post = async (req, res, next) => {
     const {email, password, passwordRepeat} = req.body;
     let cpf_cnpj = req.body.cpf_cnpj.replace(/\D/g,'');
 
-    const user = await Users.findOne({email, cpf_cnpj});
+    const results = await Users.findOne({email, cpf_cnpj});
     
-    if (user) 
+    if (results) 
         return res.render('users/register', {
             user: req.body,
             error: 'Usuário já cadastrado.'
         });
+
+    const user = results.dataValues;
 
     if (password != passwordRepeat) 
         return res.render('users/register', {
@@ -70,8 +74,8 @@ const update = async (req, res, next) => {
             error: 'Coloque sua senha para atualizar seu cadastro.'
         });
     
-    const user = await Users.findById(id);
-
+    const results = await Users.findById(id);
+    const user = results.dataValues;
     const passed = await compare(password, user.password);
 
     if (!passed) 
