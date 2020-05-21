@@ -58,5 +58,22 @@ module.exports = {
                 error: "Erro inesperado. Tente novamente mais tarde."
             });
         }
+    },
+    resetForm(req,res){
+       return res.render('session/password-reset', {
+           token: req.query.token
+       }); 
+    },
+    reset(req,res){
+        const {email, password,passwordRepeat, token } = req.body;
+
+        try {
+            
+        } catch (error) {
+            console.error(error);
+            return res.render('session/pasword-reset', {
+                error: 'Erro inesperado, tente novamente!'
+            })
+        }
     }
 }
