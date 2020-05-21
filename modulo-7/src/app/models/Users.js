@@ -2,6 +2,8 @@ const db = require("../../../models");
 const Users = db.Users;
 const Op = db.Sequelize.Op;
 const {hash} = require('bcryptjs'); 
+const Products = require('./Products');
+const fs = require('fs');
 
 module.exports = {
     findOne(filter) {
@@ -71,5 +73,19 @@ module.exports = {
                     id
             }}
             );
+    },
+    async delete(id) {
+        let products = await Products.all(id);
+
+        let files = products.map( p => p.Files.map(file => file.dataValues)[0]);
+
+        await Users.destroy({
+            where: {
+                id
+            }
+        });
+        files.map(async file => {
+            await fs.unlinkSync(file.path);
+        });
     }
 }

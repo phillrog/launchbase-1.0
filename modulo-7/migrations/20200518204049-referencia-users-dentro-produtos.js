@@ -10,7 +10,7 @@ module.exports = {
           table: 'Users',
           field: 'id',
         },
-        onDelete: 'no action',
+        onDelete: 'cascade',
         onUpdate: 'no action',
       });    
   },
