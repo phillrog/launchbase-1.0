@@ -39,9 +39,11 @@ const forgot = async (req, res, next) => {
                       error: "Email não cadastrado!"
                   });
 
+        req.user = user;
+        
         next();
     } catch (error) {
-        
+        console.error(error);
     }
 };
 module.exports = { login, forgot };

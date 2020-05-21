@@ -42,6 +42,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             type: DataTypes.DATE,      
             defaultValue: DataTypes.NOW
+        },
+        reset_token : {
+            allowNull: true,
+            type: DataTypes.TEXT
+        },
+        reset_token_expires : {
+            allowNull: true,
+            type: DataTypes.TEXT
         }
     }, 
 {
