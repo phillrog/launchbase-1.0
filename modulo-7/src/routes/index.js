@@ -15,7 +15,7 @@ routes.get('/', HomeController.index);
 // Alias
 routes.get('/ads/create', (req, res) => res.redirect("/products/create"));
 
-routes.get('/accounts', (req, res) => res.redirect("/users/register"));
+routes.get('/accounts', (req, res) => res.redirect("/users/login"));
 
 
 module.exports = routes;

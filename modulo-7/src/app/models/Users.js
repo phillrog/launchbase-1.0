@@ -8,8 +8,8 @@ module.exports = {
         return Users.findOne({
             where: {
                 [Op.or]: {
-                    email: filter.email,
-                    cpf_cnpj: filter.cpf_cnpj
+                    email: filter.email || '"Users"."email"',
+                    cpf_cnpj: filter.cpf_cnpj || '"Users"."cpf_cnpj"'
                 }
             },
             order: [
