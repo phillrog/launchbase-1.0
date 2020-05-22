@@ -1,0 +1,11 @@
+{% macro message (description) %}
+<script>
+    const formDelete = document.querySelector("#form-delete");
+
+    formDelete.addEventListener("submit", function(event){
+        const confirmation = confirm('{{description}}');
+
+        if ( ! confirmation ) event.preventDefault();
+    });
+</script>
+{% endmacro %}
