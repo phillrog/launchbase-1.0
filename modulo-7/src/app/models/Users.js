@@ -75,7 +75,7 @@ module.exports = {
             );
     },
     async delete(id) {
-        let products = await Products.all(id);
+        let products = await Products.allByUserId(id);
 
         let files = products.map( p => p.Files.map(file => file.dataValues)[0]);
 

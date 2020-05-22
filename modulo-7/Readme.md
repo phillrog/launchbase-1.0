@@ -15,5 +15,14 @@ Curso rocketseat launchbase 1.0
 
 # Resultado
 
-- Home
-![tela]()
+- Menu do anunciante
+![tela_menu](https://image.prntscr.com/image/eJXH6nZuRX_1o1l3j4gx7A.png)
+
+- Login
+![login](https://image.prntscr.com/image/6wHCTa3tTKKx4DLbHc63XA.png)
+
+- Dados anunciante
+![dados](https://image.prntscr.com/image/qwxbEHB0SiiSBZFQOwznLA.png)
+
+- Resetar senha
+![dados](https://image.prntscr.com/image/Xw_K9sLSTYa-BerBucyaRQ.png)

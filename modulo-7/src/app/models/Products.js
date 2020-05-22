@@ -178,7 +178,7 @@ module.exports = {
         });
     },
 
-    all(userId){
+    allByUserId(userId){
         return Products.findAll({            
             attibutes: [
                 "id",
