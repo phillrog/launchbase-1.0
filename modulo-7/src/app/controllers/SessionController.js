@@ -68,7 +68,7 @@ module.exports = {
     async reset(req,res){
         const user = req.user;
         const {email, password,passwordRepeat, token } = req.body;
-console.log(user)
+
         try {
             const newPassword = await hash(password, 8);
 

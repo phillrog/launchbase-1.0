@@ -16,7 +16,7 @@ const checkAllFields = (body) => {
 
 const show = async(req, res, next) => {
     const {userId: id} = req.session;
-
+    if (! id) return res.render('users/register');
     const results = await Users.findById(id);
     
     if (!results) return res.render('users/register', {
@@ -68,7 +68,7 @@ const update = async (req, res, next) => {
 
     const { id, password } = req.body;
 
-    if (! password) 
+    if (! password || ! id) 
         return res.render('users/index',{
             user: req.body,
             error: 'Coloque sua senha para atualizar seu cadastro.'
