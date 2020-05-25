@@ -33,7 +33,7 @@ module.exports = {
             user.reset_token = token;
             user.reset_token_expires = now;
 
-            await Users.update(user);
+            await Users.update({ data: user, parm: { where : { id: user.id}}});
 
             await mailer.sendMail({
                 to: user.email,
@@ -72,12 +72,15 @@ module.exports = {
         try {
             const newPassword = await hash(password, 8);
 
-            await Users.update({
+            await Users.update({ data:{
                 ...user,
                 password: newPassword,
                 reset_token: "",
                 reset_token_expires: ""
-            })
+            },
+        parm: {
+            where: {id: user.id}
+        }})
 
             return res.render('session/login',{
                 user: req.body,

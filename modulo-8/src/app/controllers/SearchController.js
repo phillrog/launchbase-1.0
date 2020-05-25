@@ -2,6 +2,8 @@ const Categories = require('../models/Categories');
 const Products = require('../models/Products');
 const Files = require('../models/Files');
 const {formatPrice, date} = require('../../lib/utils');
+const db = require("../../../models");
+const FilesModel = db.Files;
 
 module.exports = {
     async index(req, res) {
@@ -18,7 +20,26 @@ module.exports = {
         }
 
         async function getImage(productId) {
-            let results = await Products.find(productId);
+            let results = await Products.findOne({            
+                where: {id: productId},
+                attibutes: [
+                    "id",
+                    "category_id", 
+                    "user_id",
+                    "name", 
+                    "description", 
+                    "old_price",
+                    "price", 
+                    "quantity",
+                    "status",
+                    "updated_at"
+                ],
+                include : [
+                    {
+                        model : FilesModel 
+                    }
+                ]
+            });
             const product = results.dataValues;
 
             if (!product) return undefined;              

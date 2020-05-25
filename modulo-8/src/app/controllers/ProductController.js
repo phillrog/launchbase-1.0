@@ -3,6 +3,8 @@ const Products = require('../models/Products');
 const Files = require('../models/Files');
 const {formatPrice, date} = require('../../lib/utils');
 const fs = require('fs');
+const db = require("../../../models");
+const FilesModel = db.Files;
 
 module.exports = {
     async create(req, res) {
@@ -13,21 +15,67 @@ module.exports = {
     },
     async post(req, res) {
         const categories = await Categories.all({order:["name"]});               
-        
-        //save product
-        let results = await Products.create(req.body);
-        product = results.dataValues;
-
-        // save files
-        const filesPromises = req.files.map(async file => 
-            await Files.create({path: file.path, name: file.filename, product_id: product.id }));
-        await Promise.all(filesPromises);
-
+        try {
+            
+            //save product
+            const {
+                category_id, 
+                user_id, 
+                name, 
+                description, 
+                old_price, 
+                
+                quantity,
+                status
+            } = req.body;
+            let price = req.body.price.replace(/\D/g, '');
+            let results = await Products.create({
+                category_id, 
+                user_id: user_id || 1, 
+                name, 
+                description, 
+                old_price: old_price || price, 
+                price, 
+                quantity,
+                status: status || 1 
+            });
+            product = results.dataValues;
+            
+            // save files
+            const filesPromises = req.files.map(async file => 
+                await Files.create({path: file.path, name: file.filename, product_id: product.id }));
+                await Promise.all(filesPromises);
+                
+        } catch (error) {
+            console.log('Error', error);
+            return res.redirect(`/products/create`,{
+                error: "Erro inesperado"
+            });
+        }
         return res.redirect(`/products/${product.id}`);
     },
     async edit (req, res) {
-        let results = await Products.find(req.params.id);          
-console.log(results)
+        let results = await Products.findOne({            
+            where: {id: req.params.id},
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ],
+            include : [
+                {
+                    model : FilesModel 
+                }
+            ]
+        });          
+
         if (!results) return res.redirect('/',{
             error: "Produto não encontrado"
         });
@@ -91,12 +139,54 @@ console.log(results)
         req.body.price = req.body.price.replace(/\D/g, '');
 
         if (req.body.price != req.body.old_price) {
-          let oldProduct = await Products.find(req.body.id);
+          let oldProduct = await Products.findOne({            
+            where: {id : req.body.id},
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ],
+            include : [
+                {
+                    model : FilesModel 
+                }
+            ]
+        });
 
           req.body.old_price = oldProduct.price;
         }
+        const {
+            id,
+            category_id, 
+            user_id, 
+            name, 
+            description, 
+            old_price, 
+            price,
+            quantity,
+            status
+        } = req.body;
 
-        let results = await Products.update(req.body);
+        let results = await Products.update({ data: {
+            category_id, 
+            user_id: user_id , 
+            name, 
+            description, 
+            old_price: old_price || price, 
+            price, 
+            quantity,
+            status: status 
+        }, parm: {
+        where: {
+            id
+        }}});
         product = results.dataValues;
         results = await Categories.all({order:["name"]});
         const categories = results;
@@ -104,7 +194,26 @@ console.log(results)
         return res.redirect(`/products/${req.body.id}`);
     },
     async delete(req,res) {
-        let results = await Products.find(req.body.id);
+        let results = await Products.findOne({            
+            where: {id: req.body.id},
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ],
+            include : [
+                {
+                    model : FilesModel 
+                }
+            ]
+        });
 
         const product = results.dataValues;     
 
@@ -130,7 +239,26 @@ console.log(results)
         res.redirect('/');
     },
     async show(req, res) {
-        let results = await Products.find(req.params.id);
+        let results = await Products.findOne({            
+            where: {id: req.params.id},
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ],
+            include : [
+                {
+                    model : FilesModel 
+                }
+            ]
+        });
         const product = results.dataValues;
         if (!product) return res.send('Product not found!');
 
