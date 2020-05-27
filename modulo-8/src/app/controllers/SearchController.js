@@ -42,22 +42,22 @@ module.exports = {
             });
             const product = results.dataValues;
 
-            if (!product) return undefined;              
-    
+            if (!product) return undefined;          
+                
             let files = product.Files.map(file => file.dataValues);
-    
+            
             files = files.map((file) => ({
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
+            console.log(files);
             return files.length > 0 ? files[0].src : undefined;
         }
-
+        console.log(params)
         results = await Products.search(params);
-
-        console.log(results);
-
+        
         const products = results.map(prod => prod.dataValues);
+
         const productsPromise = products.map(async (prod) => {
             prod.img = await getImage(prod.id);
             prod.oldPrice = formatPrice(prod.old_price);

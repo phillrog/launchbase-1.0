@@ -1,4 +1,6 @@
     
+const db = require("../../../models");
+const FilesModel = db.Files;
 const Users = require('../models/Users');
 const {hash} = require('bcryptjs'); 
 const Products = require('../models/Products');
@@ -103,7 +105,7 @@ module.exports = {
                 ],
                 include : [
                     {
-                        model : Files 
+                        model : FilesModel 
                     }
                 ],
                 order: ['updated_at'],
