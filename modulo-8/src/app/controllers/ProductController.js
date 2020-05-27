@@ -4,6 +4,7 @@ const Files = require('../models/Files');
 const {formatPrice, date} = require('../../lib/utils');
 const fs = require('fs');
 const db = require("../../../models");
+const CategoriesModel = db.Categories
 const FilesModel = db.Files;
 
 module.exports = {

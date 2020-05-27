@@ -88,7 +88,29 @@ module.exports = {
         try {
             const id = req.session.userId;
 
-            let products = await Products.allByUserId(id);
+            let products = await Products.all({            
+                attibutes: [
+                    "id",
+                    "category_id", 
+                    "user_id",
+                    "name", 
+                    "description", 
+                    "old_price",
+                    "price", 
+                    "quantity",
+                    "status",
+                    "updated_at"
+                ],
+                include : [
+                    {
+                        model : Files 
+                    }
+                ],
+                order: ['updated_at'],
+                where: {
+                    user_id: id
+                }
+            });
 
             let files = products.map( p => p.Files.map(file => file.dataValues)[0]);
 

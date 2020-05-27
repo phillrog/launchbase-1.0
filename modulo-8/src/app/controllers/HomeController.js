@@ -7,7 +7,26 @@ const FilesModel = db.Files;
 
 module.exports = {
     async index(req, res) {
-        let results = await Products.all();
+        let results = await Products.all({            
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ],
+            include : [
+                {
+                    model : FilesModel 
+                }
+            ],
+            order: ['updated_at']
+        });
         const products = results.map(item => item.dataValues);
         
         async function getImage(productId) {

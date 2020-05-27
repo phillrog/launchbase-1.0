@@ -11,36 +11,6 @@ Base.init("Products");
 
 module.exports = {
     ...Base,
-
-    delete(id) {
-        return Products.destroy({
-            where: {
-                id
-            }
-        })
-    },
-    all(){
-        return Products.findAll({            
-            attibutes: [
-                "id",
-                "category_id", 
-                "user_id",
-                "name", 
-                "description", 
-                "old_price",
-                "price", 
-                "quantity",
-                "status",
-                "updated_at"
-            ],
-            include : [
-                {
-                    model : Files 
-                }
-            ],
-            order: ['updated_at']
-        });
-    },
     search(params) {
         const {filter, category } = params;
 
@@ -102,32 +72,6 @@ module.exports = {
                 db.sequelize.col('Files.id'),
                 db.sequelize.col('Cat.id')],
             subQuery:false  
-        });
-    },
-
-    allByUserId(userId){
-        return Products.findAll({            
-            attibutes: [
-                "id",
-                "category_id", 
-                "user_id",
-                "name", 
-                "description", 
-                "old_price",
-                "price", 
-                "quantity",
-                "status",
-                "updated_at"
-            ],
-            include : [
-                {
-                    model : Files 
-                }
-            ],
-            order: ['updated_at'],
-            where: {
-                user_id: userId
-            }
         });
     },
 }
