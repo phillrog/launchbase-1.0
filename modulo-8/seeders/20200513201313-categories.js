@@ -1,17 +1,20 @@
 'use strict';
-
+const faker = require('faker');
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
       return queryInterface.bulkInsert('Categories', [
-        {
-        name: 'Eletrônicos'
+      {
+        name: faker.commerce.productName
       },
       {
-        name: 'Comida'
+        name: faker.commerce.productName
       },
       {
-        name: 'Automóveis'
+        name: faker.commerce.productName
+      },
+      {
+        name: faker.commerce.productName
       }
     ], {});
     
