@@ -1,22 +1,14 @@
 'use strict';
+
 const faker = require('faker');
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    
-      return queryInterface.bulkInsert('Categories', [
-      {
-        name: faker.commerce.productName
-      },
-      {
-        name: faker.commerce.productName
-      },
-      {
-        name: faker.commerce.productName
-      },
-      {
-        name: faker.commerce.productName
-      }
-    ], {});
+      const categories = [1,2,3,4].map(f =>({
+        
+            name: faker.commerce.productName()
+          
+      }));
+      return queryInterface.bulkInsert('Categories', categories, {});
     
   },
 

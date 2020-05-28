@@ -18,7 +18,7 @@ module.exports = {
       },
       product_id: {
         type: Sequelize.INTEGER,
-        unique: true
+        unique: false
       },
       created_at: {
         type: Sequelize.DATE,      

@@ -9,6 +9,8 @@ module.exports = {
         table: 'Products',
         field: 'id'
       },
+      unique: false,
+      allowNull: true,
       onDelete: 'cascade',
       onUpdate: 'cascade'
     });
