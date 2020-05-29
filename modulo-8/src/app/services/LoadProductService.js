@@ -1,5 +1,7 @@
 const Products = require('../models/Products');
 const {formatPrice, date} = require('../../lib/utils');
+const db = require("../../../models");
+const FilesModel = db.Files;
 
 async function getImage(productId) {
     let results = await Products.findOne({            
@@ -33,11 +35,15 @@ async function getImage(productId) {
         src: `${file.path.replace('public', '')}`
     }))
 
-    return files.length > 0 ? files[0].src : undefined;
+    product.files = files;    
+
+    return product;
 }
 
-function format(product) {
-    product.img = await getImage(prod.id);
+async function format(product) {
+    product = await getImage(product.id);
+
+    product.img = (product.files && product.files.length > 0 && product.files[0]) ? product.files[0].src : undefined;
     product.formattedOldPrice = formatPrice(product.old_price);
     product.formattedPrice = formatPrice(product.price);
     
@@ -49,27 +55,32 @@ function format(product) {
 
     product.oldPrice = formatPrice(product.old_price);
     product.price = formatPrice(product.price);
+
+    return product;
 }
 
 const LoadService = {
     load(service, filter) {
         this.filter = filter;
-        return this[service]()
+        return this[service]();
     },
-    product() {
+    async product() {
         try {
-            const product = await Products.findOne(this.filter);
+            const productFind = await Products.findOne(this.filter);
+            const product = productFind.dataValues;
 
             return format(product);
         } catch (error) {
             console.log(error)
         }
     },
-    products(){
+    async products(){
         try {
-            const products = await Products.all(this.filter);
-            const productPromise = products.map(format)
+            const productsFind = await Products.all(this.filter);
+            const products = productsFind.map(item => item.dataValues);
+            const productPromise = products.map(format);
             return Promise.all(productPromise);
+
         } catch (error) {
             console.log(error)
         }

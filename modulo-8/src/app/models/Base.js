@@ -25,15 +25,13 @@ const Base = {
             parm.include = include;
         }
 
-        console.log(parm)
-
         return db[this.model].findOne(parm);
     },
     create(data) {
         return db[this.model].create(data);
     },
     update({data, parm}) {      
-                     console.log(data, parm)
+
         return db[this.model].update(data, parm);
     },
     delete(id) {
@@ -59,8 +57,6 @@ const Base = {
         if (include) {
             parm.include = include;
         }
-
-        console.log(parm)
 
         return db[this.model].findAll(parm);
     }

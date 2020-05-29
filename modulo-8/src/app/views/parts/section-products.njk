@@ -16,10 +16,10 @@
                     {% endif %}
                 >
                 </div>
-                {% if product.price  != product.oldPrice %}
-                <p class="old-price">{{product.oldPrice}}</p>
+                {% if product.price  != product.formattedOldPrice %}
+                <p class="old-price">{{product.formattedOldPrice}}</p>
                 {% endif %}
-                <p class="price">{{product.price}}</p>
+                <p class="price">{{product.formattedPrice}}</p>
                 <h4>{{product.name}}</h4>
                 <a href="/products/{{product.id}}" class="button">Ver Produto</a>
 

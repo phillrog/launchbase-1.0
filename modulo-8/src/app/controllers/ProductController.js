@@ -6,6 +6,7 @@ const fs = require('fs');
 const db = require("../../../models");
 const CategoriesModel = db.Categories
 const FilesModel = db.Files;
+const LoadProductService = require('../services/LoadProductService');
 
 module.exports = {
     async create(req, res) {
@@ -240,7 +241,7 @@ module.exports = {
         res.redirect('/');
     },
     async show(req, res) {
-        let results = await Products.findOne({            
+        let product = await LoadProductService.load('product', {            
             where: {id: req.params.id},
             attibutes: [
                 "id",
@@ -260,26 +261,7 @@ module.exports = {
                 }
             ]
         });
-        const product = results.dataValues;
-        if (!product) return res.send('Product not found!');
 
-        const { day, hour, minutes, month } = date(product.updated_at);
-        product.published = { 
-            day: `${day}/${month}`,
-            hour: `${hour}h${minutes}`
-        };
-
-        product.oldPrice = formatPrice(product.old_price);
-        product.price = formatPrice(product.price);
-
-
-        let files = product.Files.map(file => file.dataValues);
-
-        files = files.map((file) => ({
-            ...file,
-            src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-        }))
-
-        return res.render("products/show.njk", { product, files });
+        return res.render("products/show.njk", { product });
     }
 }
