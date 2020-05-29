@@ -10,9 +10,9 @@ module.exports = {
     async index(req, res) {
        let results, params = {};
 
-       const { filter, category } = req.query;
-       
-        if (!filter) return res.redirect('/');
+       let { filter, category } = req.query;
+
+        if (!filter || filter.toLowerCase() == 'toda a loja') filter = null;
 
         params.filter = filter;
 
@@ -27,10 +27,10 @@ module.exports = {
         const products = await Promise.all(productsPromises);
 
         const search = {
-            term: req.query.filter,
-            total: products.length
+            term: filter || 'Toda a loja',
+            total: products.length,
+            category 
         }
-        
         const categories = products.map( product =>( {
             id: product.category_id,
             name: product.Cat.name

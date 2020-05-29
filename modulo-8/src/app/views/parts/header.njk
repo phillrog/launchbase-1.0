@@ -9,7 +9,7 @@
         <form class="search" action="/products/search" method="get">
             <input type="text" name="filter" id="filter" placeholder="Buscar por Produtos"
                {% if search.term %}
-               value={{search.term}}
+               value="{{search.term}}"
                {% endif %}               
             />
         </form>

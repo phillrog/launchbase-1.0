@@ -41,18 +41,20 @@ async function getImage(productId) {
 }
 
 async function format(product) {
+    const Cat = product.Cat;
+
     product = await getImage(product.id);
 
     product.img = (product.files && product.files.length > 0 && product.files[0]) ? product.files[0].src : undefined;
     product.formattedOldPrice = formatPrice(product.old_price);
     product.formattedPrice = formatPrice(product.price);
-    
+    product.Cat = Cat;
+
     const { day, hour, minutes, month } = date(product.updated_at);
     product.published = { 
         day: `${day}/${month}`,
         hour: `${hour}h${minutes}`
     };
-
     product.oldPrice = formatPrice(product.old_price);
     product.price = formatPrice(product.price);
 

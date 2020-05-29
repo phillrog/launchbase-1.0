@@ -21,11 +21,12 @@ module.exports = {
                 [Op.or]: { 
                     name: {[Op.like]: `%${filter}%`},
                     description: {[Op.like]: `%${filter}%`},                           
-                }
+                },
+                status: 1
             };
 
-            whereSubquery = `"Products"."name" like '%${filter}%' OR 
-            "Instructors"."description" like '%${filter}%' `;
+            whereSubquery = `("Products"."name" like '%${filter}%' OR 
+            "Instructors"."description" like '%${filter}%') AND "Products"."status" = 1`;
 
             whereSubquery = "WHERE " + whereSubquery;
         }
