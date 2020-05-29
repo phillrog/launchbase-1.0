@@ -6,6 +6,7 @@ const {hash} = require('bcryptjs');
 const Products = require('../models/Products');
 const fs = require('fs');
 const {formatCep, formatCpfCnpj} = require('../../lib/utils');
+const LoadProductService = require('../services/LoadProductService');
 
 module.exports = {
     registerForm(req, res) {
@@ -134,6 +135,33 @@ module.exports = {
                 user: req.body
             });
         }
+    },
+    async ads(req, res) {
+        const products = await LoadProductService.load('products',{            
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ],
+            include : [
+                {
+                    model : FilesModel 
+                }
+            ],
+            order: ['updated_at'],
+            where: {
+                user_id: req.session.userId
+            }
+        });
+
+        return res.render('users/ads', {products})
     }
     
 }
