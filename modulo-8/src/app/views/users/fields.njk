@@ -5,7 +5,7 @@
         placeholder="Digite seu nome completo"
         value="{{user.name}}"
         required
-        ></div>
+        >
     </div>
 </div>
 
@@ -15,8 +15,9 @@
         placeholder="Digite seu e-mail"
         value="{{user.email}}"
         onblur="Validate.apply(this,'isEmail')"
-        ></div>  
-    </div>
+        >
+    </div>  
+    
 </div>
 
 <div class="item">
@@ -29,7 +30,6 @@
         {% endif %}
         
         ></div>
-    </div>
 </div>
 
 {% if not user.id %}
@@ -40,7 +40,6 @@
         placeholder="Repita a senha escolhida"
         
         ></div>
-    </div>
 </div>
 
 {% endif %}
@@ -55,7 +54,6 @@
         onkeydown="Mask.apply(this, 'cpfCnpj')"
         onblur="Validate.apply(this,'isCpfCnpj')"
         ></div>
-    </div>
 </div>
 
 <div class="item">
@@ -66,7 +64,6 @@
         onkeydown="Mask.apply(this, 'cep')"
         onblur="Validate.apply(this,'isCep')"
         ></div>
-    </div>
 </div>
 
 <div class="item">
@@ -75,5 +72,4 @@
         placeholder="Digite seu endereço completo"
         value="{{user.cep}}"
         ></div>
-    </div>
 </div>

@@ -1,10 +1,11 @@
 /* === USER-REGISTER === */
 
-.user-register {
+.users-register,
+.users-dashboard {
     max-width: 500px;
 }
 
-.users.ads {
+.users-ads {
     max-width: 700px;
 }
 
