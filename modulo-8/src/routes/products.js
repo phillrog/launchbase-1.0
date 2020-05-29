@@ -15,7 +15,7 @@ routes.get('/:id', ProductController.show );
 routes.get('/:id/edit',ProductController.edit );
 
 routes.post('/', multer.array('photos', 6), ProductsValidator.post,ProductController.post );
-routes.put('/',multer.array('photos', 6), ProductController.put );
+routes.put('/',multer.array('photos', 6), ProductsValidator.put, ProductController.put );
 routes.delete('/',ProductController.delete );
 
 module.exports = routes;

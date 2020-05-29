@@ -54,7 +54,7 @@ module.exports = {
                 error: "Erro inesperado"
             });
         }
-        return res.redirect(`/products/${product.id}`);
+        return res.redirect(`/products/${product.id}/edit`);
     },
     async edit (req, res) {
         let results = await Products.findOne({            
@@ -101,13 +101,7 @@ module.exports = {
 
     },
     async put(req, res) {
-        const keys = Object.keys(req.body);
 
-        for (const key of keys) {
-            if (req.body[key] == "" && key != "removed_files") {
-                return res.send("Please fill all fields");
-            }
-        }
         if ( req.files.length != 0) {
             const newFilesPromise = req.files.map(file => 
                 Files.create({path: file.path, name: file.filename, product_id: product.id }));
