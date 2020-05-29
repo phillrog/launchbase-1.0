@@ -586,12 +586,6 @@ input[type=radio]::after {
     
 } 
 
-/* === USER-REGISTER === */
-
-.user-register.container.form {
-    max-width: 500px;
-}
-
 /* .form input[name="cep"],
 .form input[name="email"],
 .form input[name="password"],
