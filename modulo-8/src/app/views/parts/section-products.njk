@@ -1,0 +1,31 @@
+{% macro products (name, classes, products) %}
+
+
+<section class="shop {{classes}}">
+    {% if name %}
+        <h2>{{name}}</h2>
+    {% endif %}
+    <div class="items">
+        {% for product  in products %}
+            <div class="product">
+                <div class="image"
+                    {% if product.img %}
+                        style="background-image: url('{{product.img}}');"
+                    {% else %}
+                        style="background-image: url('//placehold.it/500x500?text=PRODUTO SEM FOTO');"
+                    {% endif %}
+                >
+                </div>
+                {% if product.price  != product.formattedOldPrice %}
+                <p class="old-price">{{product.formattedOldPrice}}</p>
+                {% endif %}
+                <p class="price">{{product.formattedPrice}}</p>
+                <h4>{{product.name}}</h4>
+                <a href="/products/{{product.id}}" class="button">Ver Produto</a>
+
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endmacro %}
