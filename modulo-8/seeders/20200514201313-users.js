@@ -2,16 +2,14 @@
 
 const {hash} = require('bcryptjs');
 const faker = require('faker');
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-      async function newPassword() {
-        return  await hash('1234', 8);
-      }
 
-      let password = "";
-      newPassword().then(p => {
-        password = p;
-      })
+function newPassword() {
+  return  hash('1234', 8);
+}
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {      
+      let password = await newPassword();
 
       const users = [{       
         name: "Phillipe Roger Souza",
