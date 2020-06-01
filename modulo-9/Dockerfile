@@ -14,6 +14,7 @@ RUN npm install decamelize
 RUN npm install -g pg
 RUN npm install -g sequelize
 RUN npm install -g sequelize-cli
+RUN npm install -g faker
 
 COPY . .
 
