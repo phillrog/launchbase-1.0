@@ -3,10 +3,12 @@ Curso rocketseat launchbase 1.0
 
 # Módulo - 4 parte 3
 
- - Foi refatorado a aplicação para separar logica do model.
- - Foi aprendido a usar o faker para criar seeds
- - Foi aprendido a renderizar uma view através do caller do nunjucks
- - Foi aprendido a utilizar o lottie para renderizar animações
+ - Foi abordado diversas regras de negócio que envolvem um carrinho. Ex:
+ * Se item não existir
+ * Quantidade do item excedida
+ * Atualizar o item
+ * Atualizar o carrinho
+ Obs: Muito interessante as regras passadas.
 
 # Resultado
 
