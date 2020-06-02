@@ -8,6 +8,8 @@ Curso rocketseat launchbase 1.0
  * Quantidade do item excedida
  * Atualizar o item
  * Atualizar o carrinho
+ * Remover do carrinho
+ * Atualizar preço
  Obs: Muito interessante as regras passadas.
 
 # Resultado

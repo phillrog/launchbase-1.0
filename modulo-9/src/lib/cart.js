@@ -48,7 +48,27 @@ const Cart = {
         return this;
     },
     removeOne(productId){
+        // pegar item do carrinho
+        const inCart = this.items.find(item => item.product.id == product.id);
 
+        if (!inCart) return this;
+
+        // atualiza o item
+        inCart.quantity--;
+        inCart.price = inCart.product.price * inCart.quantity;
+        inCart.formatPrice = formatPrice(inCart.price);
+
+        //atualiza carrinho
+        this.total.quantity++;
+        this.total.price -= inCart.product.price;
+        this.total.formattedPrice = formatPrice(this.total.price);
+
+        if (inCart.quantity < 1) {
+            this.items = this.items.find(item => item.product.id != inCart.product.id);
+            return this;
+        }
+
+        return this;
     },
     delete(productId){
 
