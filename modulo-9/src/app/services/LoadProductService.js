@@ -55,8 +55,8 @@ async function format(product) {
         day: `${day}/${month}`,
         hour: `${hour}h${minutes}`
     };
-    product.oldPrice = formatPrice(product.old_price);
-    product.price = formatPrice(product.price);
+    product.oldPrice = product.old_price;
+    product.price = product.price;
 
     return product;
 }

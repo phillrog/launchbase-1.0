@@ -22,7 +22,7 @@ const Cart = {
         if (!inCart){
             inCart = {
                 product: {...product,
-                    formattedPrice = formatPrice(product.price)
+                    formattedPrice: formatPrice(product.price)
                 },
                 quantity: 0,
                 price: 0,
@@ -38,7 +38,7 @@ const Cart = {
         //atualiza item
         inCart.quantity++;
         inCart.price = inCart.product.price * inCart.quantity;
-        inCart.formatPrice = formatPrice(inCart.price);
+        inCart.formattedPrice = formatPrice(inCart.price);
 
         //atualiza carrinho
         this.total.quantity++;
@@ -56,7 +56,7 @@ const Cart = {
         // atualiza o item
         inCart.quantity--;
         inCart.price = inCart.product.price * inCart.quantity;
-        inCart.formatPrice = formatPrice(inCart.price);
+        inCart.formattedPrice = formatPrice(inCart.price);
 
         //atualiza carrinho
         this.total.quantity++;
