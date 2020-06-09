@@ -2,7 +2,7 @@ const { formatPrice} = require('./utils');
 const Cart = {
     init(oldCart){
         if (oldCart) {
-            this.items = oldCart.items;
+            this.items = oldCart.items || [];
             this.total = oldCart.total;
         } else {
             this.items = [];
@@ -71,7 +71,7 @@ const Cart = {
         return this;
     },
     delete(productId){
-        const inCart = this.getCartItem(product.id);
+        const inCart = this.getCartItem(productId);
         if (!inCart) return this;
 
         if (this.items.length > 0) {
