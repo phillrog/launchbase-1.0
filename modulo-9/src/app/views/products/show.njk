@@ -50,9 +50,9 @@
         </div>
         <div class="price-buy">
             <div class="price">
-                {{product.price}}
+                {{product.formattedPrice}}
                 {% if product.price != product.oldPrice %}
-                    <span class="old">{{product.oldPrice}}</span>
+                    <span class="old">{{product.formattedOldPrice}}</span>
                 {% endif %}
             </div>
             {% if (session.userId) and (product.user_id == session.userId) %}
@@ -64,9 +64,9 @@
                     {% elseif product.quantity == 0 %}
                         <p class="unavailable">Fora de Estoque</p>
                     {% else %}
-                    <form action="/users/orders" method="post">
+                    <form action="/cart/{{product.id}}/add-one" method="post">
                         <input type="hidden" name="id" value="{{product.id}}">
-                        <button class="button">Comprar</button>
+                        <button class="button">Adicionar ao carrinho</button>
                     </form>
                     {% endif %}
                 </div>

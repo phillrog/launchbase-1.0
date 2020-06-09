@@ -8,31 +8,11 @@ const LoadProductService = require('../services/LoadProductService');
 
 module.exports = {
     async index(req, res) {
-        try {
-            const product = await LoadProductService.load('product', { 
-                where: {id: 1},
-                attibutes: [
-                    "id",
-                    "category_id", 
-                    "user_id",
-                    "name", 
-                    "description", 
-                    "old_price",
-                    "price", 
-                    "quantity",
-                    "status",
-                    "updated_at"
-                ],
-                include : [
-                    {
-                        model : FilesModel 
-                    }
-                ]
-            });
+        try {            
             let { cart } = req.session;
             
-            cart = Cart.init(cart).addOne(product);
-            console.log(cart.items[0].product)
+            cart = Cart.init(cart);
+            
             return res.render('cart/index', { cart });
 
         } catch (error) {
@@ -40,5 +20,30 @@ module.exports = {
         }
         
     },
+    async addOne(req, res) {
+        const { id } = req.params;
+
+        const product = await LoadProductService.load('product', {            
+            where: { id },
+            attibutes: [
+                "id",
+                "category_id", 
+                "user_id",
+                "name", 
+                "description", 
+                "old_price",
+                "price", 
+                "quantity",
+                "status",
+                "updated_at"
+            ]
+        });
+
+        let { cart } = req.session;
+
+        req.session.cart = Cart.init(cart).addOne(product);
+
+        return res.redirect('/cart');
+    }
     
 }
