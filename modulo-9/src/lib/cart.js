@@ -49,7 +49,7 @@ const Cart = {
     },
     removeOne(productId){
         // pegar item do carrinho
-        const inCart = this.getCartItem(product.id);
+        const inCart = this.getCartItem(productId);
 
         if (!inCart) return this;
 
@@ -85,7 +85,7 @@ const Cart = {
         return this;
     },
     getCartItem(productId) {
-        return this.items.find(item => item.product.id == productId);
+        return this.items != null && this.items.length > 0 ? this.items.find(item => item.product.id == productId) : undefined;
     }
 }
 

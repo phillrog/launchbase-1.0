@@ -47,18 +47,18 @@ async function format(product) {
 
     product.img = (product.files && product.files.length > 0 && product.files[0]) ? product.files[0].src : undefined;
 
-    product.formattedOldPrice = formatPrice(product.old_price);
-    product.formattedPrice = formatPrice(product.price);
     product.Cat = Cat;
-
+    
     const { day, hour, minutes, month } = date(product.updated_at);
     product.published = { 
         day: `${day}/${month}`,
         hour: `${hour}h${minutes}`
     };
-    product.oldPrice = product.old_price;
-    product.price = product.price;
-
+    product.oldPrice = Number(product.old_price);
+    product.price = Number(product.price);
+    
+    product.formattedOldPrice = formatPrice(product.old_price);
+    product.formattedPrice = formatPrice(product.price);
     return product;
 }
 
