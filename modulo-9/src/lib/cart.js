@@ -17,12 +17,12 @@ const Cart = {
     },
     addOne(product){
         let inCart = this.getCartItem(product.id);
-
+     
         //se não exisitr
         if (!inCart){
             inCart = {
-                product: {...product,
-                    formattedPrice: formatPrice(product.price)
+                product: {
+                    ...product
                 },
                 quantity: 0,
                 price: 0,

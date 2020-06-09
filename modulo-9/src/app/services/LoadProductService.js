@@ -46,6 +46,7 @@ async function format(product) {
     product = await getImage(product.id);
 
     product.img = (product.files && product.files.length > 0 && product.files[0]) ? product.files[0].src : undefined;
+
     product.formattedOldPrice = formatPrice(product.old_price);
     product.formattedPrice = formatPrice(product.price);
     product.Cat = Cat;

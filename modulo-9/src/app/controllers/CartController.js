@@ -30,10 +30,9 @@ module.exports = {
                 ]
             });
             let { cart } = req.session;
-            console.log(product);
+            
             cart = Cart.init(cart).addOne(product);
-            console.log(cart);
-
+            console.log(cart.items[0].product)
             return res.render('cart/index', { cart });
 
         } catch (error) {
