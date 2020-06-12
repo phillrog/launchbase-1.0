@@ -36,7 +36,7 @@ ul.dropdown li a,
 ul.dropdown li button {
     font-size: 16px;
     color: #333;
-    background-color: white;
+
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -46,6 +46,10 @@ ul.dropdown li button {
 
     padding: 0 16px;
     border-radius: 4px ;
+}
+
+ul.dropdown li button {
+    background-color: white;
 }
 
 ul.dropdown li:hover,
