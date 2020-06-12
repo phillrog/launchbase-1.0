@@ -3,40 +3,40 @@
 
 {% block content %}
 
-{% if((orders.length < 1)) %}
+{% if((sales.length < 1)) %}
      {% call card.render('', 'cart-empty container ')%}
-        <p>Nenhum Pedido</p>
-        <a href="/products/search" class="button">Compre agora</a>
+        <p>Nenhuma Venda</p>
+        <a href="/products/search" class="button">Comece a Vender</a>
      {% endcall %}
 {% else %}
-    {% call card.render('Meus Pedidos', 'orders container')%}
+    {% call card.render('Minhas Vendas', 'sales orders container')%}
 
     <div class="items">
-        {% for order in orders %}
+        {% for sale in sales %}
             <div class="item-container">
                 <div class="item">
                 
-                     {% if not order.product.img  %}
+                     {% if not sale.product.img  %}
                     <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="Imagem do produto">
                     {% else %}
-                    <img src="{{order.product.img}}" 
-                    alt="Imagem do produto {{order.product.name}}">
+                    <img src="{{sale.product.img}}" 
+                    alt="Imagem do produto {{sale.product.name}}">
                     {% endif %}
                  
                     <div>
-                        <div class="title">{{order.product.name}}</div>
-                        <div class="price">{{order.product.formattedPrice}}</div>
-                        <div class="updated-at">{{order.formattedUpdatedAt}}</div>
+                        <div class="title">{{sale.product.name}}</div>
+                        <div class="price">{{sale.product.formattedPrice}}</div>
+                        <div class="updated-at">{{sale.formattedUpdatedAt}}</div>
                     </div>
                 </div>
                 <div class="quantity">
-                    Qtd. {{order.quantity}}
+                    Qtd. {{sale.quantity}}
                 </div>
                 <div class="total">
-                    {{order.formattedTotal}}
+                    {{sale.formattedTotal}}
                 </div>
-                <div class="status {{order.status}}">
-                    {{order.formattedStatus}}
+                <div class="status {{sale.status}}">
+                    {{sale.formattedStatus}}
                 </div>
             </div>
             
