@@ -13,6 +13,7 @@ module.exports = {
             hour,
             minutes,
             month,
+            year,
             iso: `${year}-${month}-${day}`,
             birthDay: `${day}/${month}`
         };

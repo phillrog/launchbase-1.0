@@ -25,6 +25,57 @@ const email = (seller, product, buyer) => `
 `;
 
 module.exports = {
+    async index(req,res) {
+        let orders = await Orders.all({ where: { buyer_id: req.session.userId}});
+
+        const getOrdersPromise = orders.map(async order => {
+            order.product = await await LoadProductService.load('products',{            
+                attibutes: [
+                    "id",
+                    "category_id", 
+                    "user_id",
+                    "name", 
+                    "description", 
+                    "old_price",
+                    "price", 
+                    "quantity",
+                    "status",
+                    "updated_at"
+                ],
+                include : [
+                    {
+                        model : FilesModel 
+                    }
+                ],
+                order: ['updated_at'],
+                where: {
+                    id: order.product_id
+                }
+            });
+
+            order.buyer = await User.findOne({where:{ id: order.buyer_id}});
+            order.seller = await User.findOne({where:{ id: order.seller_id}});
+
+            order.formattedPrice = formatPrice(order.price);
+            order.formattedTotal = formatPrice(order.total);
+
+            const statuses = {
+                open: 'Aberto',
+                sold: 'Vendido',
+                canceled: 'Cancelado'
+            };
+
+            order.formatedStatus = statuses[order.status];
+            const updateAt = date(order.updated_at)
+            order.formattedUpdatedAt = `${order.formatedStatus} em ${updateAt.day}/${updateAt.month}/${updateAt.year} às ${updateAt.hour}:${updateAt.minutes}`;
+
+            return order;
+       });
+
+       orders = await Promise.all(getOrdersPromise);
+
+       return res.render('orders/index', {orders});
+    },
     async post(req, res) {
         try {
 
@@ -86,6 +137,10 @@ module.exports = {
             });
 
             await Promise.all(createdOrdersPromise);
+
+            delete req.session.cart;
+
+            Cart.init();
 
             return res.render('orders/success');
 
