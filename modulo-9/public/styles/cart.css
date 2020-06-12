@@ -27,6 +27,7 @@
 }
 
 .cart .item {
+    margin-bottom: 2px;
     display: grid;
     grid-template-columns: 1fr 100px 100px 30px;
     grid-gap: 16px;

@@ -22,8 +22,12 @@
 
             <div class="item">
                 <a href="/products/{{item.product.id}}">
+                    {% if not item.product.img  %}
+                    <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="Imagem do produto">
+                    {% else %}
                     <img src="{{item.product.img}}" 
                     alt="Imagem do produto">
+                    {% endif %}
                     <span class="title">{{item.product.name}}</span>
                 </a>
                 <span class="price">{{item.formattedPrice}}</span>
