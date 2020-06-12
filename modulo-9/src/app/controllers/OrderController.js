@@ -65,9 +65,9 @@ module.exports = {
                 canceled: 'Cancelado'
             };
 
-            order.formatedStatus = statuses[order.status];
+            order.formattedStatus = statuses[order.status];
             const updateAt = date(order.updated_at)
-            order.formattedUpdatedAt = `${order.formatedStatus} em ${updateAt.day}/${updateAt.month}/${updateAt.year} às ${updateAt.hour}:${updateAt.minutes}`;
+            order.formattedUpdatedAt = `${order.formattedStatus} em ${updateAt.day}/${updateAt.month}/${updateAt.year} às ${updateAt.hour}:${updateAt.minutes}`;
 
             return order;
        });
