@@ -37,7 +37,7 @@
 /* === Meus Pedidos ===  */
 .orders .item-container {
     display: grid;
-    grid-template-columns: 1fr auto auto 100px;
+    grid-template-columns: 1fr auto auto 100px 1fr;
     grid-gap: 32px;
 
     align-items: center;
