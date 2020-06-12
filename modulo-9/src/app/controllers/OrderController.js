@@ -29,7 +29,7 @@ module.exports = {
         let orders = await Orders.all({ where: { buyer_id: req.session.userId}});
 
         const getOrdersPromise = orders.map(async order => {
-            order.product = await await LoadProductService.load('products',{            
+            order.product = await await LoadProductService.load('product',{            
                 attibutes: [
                     "id",
                     "category_id", 
@@ -47,7 +47,7 @@ module.exports = {
                         model : FilesModel 
                     }
                 ],
-                order: ['updated_at'],
+   
                 where: {
                     id: order.product_id
                 }
@@ -67,7 +67,7 @@ module.exports = {
 
             order.formattedStatus = statuses[order.status];
             const updateAt = date(order.updated_at)
-            order.formattedUpdatedAt = `${order.formattedStatus} em ${updateAt.day}/${updateAt.month}/${updateAt.year} às ${updateAt.hour}:${updateAt.minutes}`;
+            order.formattedUpdatedAt = `${order.formattedStatus} em ${updateAt.day}/${updateAt.month}/${updateAt.year} às ${updateAt.hour}h:${updateAt.minutes}`;
 
             return order;
        });

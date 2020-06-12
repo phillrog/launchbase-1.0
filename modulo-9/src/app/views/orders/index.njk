@@ -15,14 +15,16 @@
         {% for order in orders %}
             <div class="item-container">
                 <div class="item">
+                
                      {% if not order.product.img  %}
                     <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="Imagem do produto">
                     {% else %}
                     <img src="{{order.product.img}}" 
                     alt="Imagem do produto {{order.product.name}}">
                     {% endif %}
+                 
                     <div>
-                        <div class="title">{{order.product.title}}</div>
+                        <div class="title">{{order.product.name}}</div>
                         <div class="price">{{order.product.formattedPrice}}</div>
                         <div class="updated-at">{{order.formattedUpdatedAt}}</div>
                     </div>
@@ -33,7 +35,7 @@
                 <div class="total">
                     {{order.formattedTotal}}
                 </div>
-                <div class="status">
+                <div class="status {{order.status}}">
                     {{order.formattedStatus}}
                 </div>
             </div>
