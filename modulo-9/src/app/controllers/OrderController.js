@@ -3,6 +3,7 @@ const db = require("../../../models");
 const FilesModel = db.Files;
 const {formatPrice, date} = require('../../lib/utils');
 const LoadProductService = require('../services/LoadProductService');
+const LoadOrderService = require('../services/LoadOrderService');
 const User = require('../models/Users');
 const mailer = require('../../lib/mailer');
 const Cart = require('../../lib/cart');
@@ -26,53 +27,7 @@ const email = (seller, product, buyer) => `
 
 module.exports = {
     async index(req,res) {
-        let orders = await Orders.all({ where: { buyer_id: req.session.userId}});
-
-        const getOrdersPromise = orders.map(async order => {
-            order.product = await await LoadProductService.load('product',{            
-                attibutes: [
-                    "id",
-                    "category_id", 
-                    "user_id",
-                    "name", 
-                    "description", 
-                    "old_price",
-                    "price", 
-                    "quantity",
-                    "status",
-                    "updated_at"
-                ],
-                include : [
-                    {
-                        model : FilesModel 
-                    }
-                ],
-   
-                where: {
-                    id: order.product_id
-                }
-            });
-
-            order.buyer = await User.findOne({where:{ id: order.buyer_id}});
-            order.seller = await User.findOne({where:{ id: order.seller_id}});
-
-            order.formattedPrice = formatPrice(order.price);
-            order.formattedTotal = formatPrice(order.total);
-
-            const statuses = {
-                open: 'Aberto',
-                sold: 'Vendido',
-                canceled: 'Cancelado'
-            };
-
-            order.formattedStatus = statuses[order.status];
-            const updateAt = date(order.updated_at)
-            order.formattedUpdatedAt = `${order.formattedStatus} em ${updateAt.day}/${updateAt.month}/${updateAt.year} às ${updateAt.hour}h:${updateAt.minutes}`;
-
-            return order;
-       });
-
-       orders = await Promise.all(getOrdersPromise);
+       let orders = await LoadOrderService.load('orders', { where: { buyer_id: req.session.userId}});
 
        return res.render('orders/index', {orders});
     },
@@ -151,5 +106,9 @@ module.exports = {
         }
         
     },
-    
+    async sales(req, res) {
+        let sales = await LoadOrderService.load('orders', { where: { seller_id: req.session.userId}});
+
+       return res.render('orders/sales', {sales});
+    }
 }
