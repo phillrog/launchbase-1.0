@@ -1,6 +1,9 @@
 # launchbase-1.0
 Curso rocketseat launchbase 1.0
 
+# Como rodar ?
+Execute ```npm install``` ou ```yarn```. Em seguida navegue pelo terminal até a raiz do diretório modulo-9 e execute ```docker-compose up --build``` .
+
 # Nota
 Excelente curso. Se aprende diversas técnicas CSS e conceitos interessantes de negócio.
 
