@@ -6,7 +6,7 @@ const FilesModel = db.Files;
 const LoadProductService = require('./LoadProductService');
 
 async function format(order) {
-    order.product = await await LoadProductService.load('product',{            
+    order.product = await LoadProductService.load('productWithDelete',{            
         attibutes: [
             "id",
             "category_id", 
@@ -20,9 +20,7 @@ async function format(order) {
             "updated_at"
         ],
         include : [
-            {
-                model : FilesModel 
-            }
+            
         ],
 
         where: {

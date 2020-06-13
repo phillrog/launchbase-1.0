@@ -68,10 +68,7 @@ module.exports = {
             ],
             as: "Products",
             order: ['updated_at'],
-            group: [
-                db.sequelize.col('Products.id'), 
-                db.sequelize.col('Files.id'),
-                db.sequelize.col('Cat.id')],
+            
             subQuery:false  
         });
     },

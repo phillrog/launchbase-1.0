@@ -68,4 +68,5 @@ ul.dropdown li:hover button {
 
 .actions.dropdown-container:hover {
     background-color: white;
+    width: 75%;
 }

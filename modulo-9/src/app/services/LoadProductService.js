@@ -1,7 +1,9 @@
 const Products = require('../models/Products');
 const {formatPrice, date} = require('../../lib/utils');
 const db = require("../../../models");
+const ProductsWD = require('../models/ProductsWD');
 const FilesModel = db.Files;
+const Files = require('../models/Files');
 
 async function getImage(productId) {
     let results = await Products.findOne({            
@@ -20,14 +22,30 @@ async function getImage(productId) {
         ],
         include : [
             {
-                model : FilesModel 
+                model : FilesModel ,
+                attibutes: [
+                    "id",
+                    "name", 
+                    "path",
+                    "product_id", 
+                    "created_at",
+                    "updated_at"
+                ]
             }
         ]
     });
-    const product = results.dataValues;
+    let product = results.dataValues;
 
     if (!product) return undefined;          
-        
+    
+    product.Files = await Files.all({ attibutes: [
+        "id",
+        "name", 
+        "path",
+        "product_id", 
+        "created_at",
+        "updated_at"
+    ], where: {product_id: productId}});
     let files = product.Files.map(file => file.dataValues);
     
     files = files.map((file) => ({
@@ -87,6 +105,16 @@ const LoadService = {
         } catch (error) {
             console.log(error)
         }
+    },
+    async productWithDelete(){
+        try {
+            const productFind = await ProductsWD.findOne(this.filter);
+            const product = productFind.dataValues;
+
+            return format(product);
+        } catch (error) {
+            console.error(error);
+        } 
     },
     format
 }

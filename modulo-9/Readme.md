@@ -11,6 +11,7 @@ Curso rocketseat launchbase 1.0
  * Remover do carrinho
  * Atualizar preço
  Obs: Muito interessante as regras passadas.
+ - Foi aplicado sonceito de Soft Delete para "apagar" registros da base de dados. 
 
 # Resultado
 
@@ -31,3 +32,18 @@ Curso rocketseat launchbase 1.0
 
 - E-mail de venda
 ![venda](https://image.prntscr.com/image/hzgE3dk0SWaV1lprxpZLMg.png)
+
+- Adicionar ao carrinho
+![add_cart](https://image.prntscr.com/image/PiZgr9w5TeaNE6sP5s-vag.png)
+
+- Carrinho
+![cart](https://image.prntscr.com/image/YCw7khlVRvysm2vYdp4_0w.png)
+
+- Meus pedidos
+![order](https://image.prntscr.com/image/FoB2fFJFQXSuRnUrtBmPKA.png)
+
+- Detalhes dos pedidos
+![order_details](https://image.prntscr.com/image/Ak-o6wn-TjWnxml3C35zCA.png)
+
+- Minhas vendas
+![my_orders](https://image.prntscr.com/image/BJehi0olQEq-vAY5FTnZGA.png)

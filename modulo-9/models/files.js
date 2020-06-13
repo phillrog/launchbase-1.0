@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   Files.associate = function(models) {
     Files.belongsTo(models.Products, { unique: false, 
       foreignKey : {name: "product_id", allowNull: true , unique: false }});
+
   };
   return Files;
 };
