@@ -1,0 +1,43 @@
+{% extends "../layout.njk" %}
+{% import "parts/card.njk" as cards %}
+
+{% block content %}
+
+{% call cards.render('Meus anúncios', 'users-ads container') %}
+
+    <div class="items">
+        {% for product in products %}
+
+            <div class="item">
+                {% if not product.files[0] %}
+                <div class="image" 
+                    style="background-image: url(/images/placeholder.png)"
+                ></div>
+              
+            {% else %}
+                <div class="image" 
+                    style="background-image: url({{product.img}})"
+                ></div>
+            {% endif %}
+               
+
+                <div class="info">
+                    <div class="title">{{product.name}}</div>
+                    <div class="price">{{product.formattedPrice}}</div>
+                    <div class="published">Publicado em {{product.formattedCreatedAt}}</div>
+                    <div class="actions">
+                        <a href="/products/{{product.id}}/edit">Editar</a>
+                        <a href="/products/{{product.id}}">Visualizar</a>
+                    </div>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endcall %}
+
+{% import "../confirmation.njk" as util %}
+{{ util.message("Tem certeza que deseja excluir a sua conta ? Essa operação não poderá ser desfeita.") }}
+{% endblock content %}

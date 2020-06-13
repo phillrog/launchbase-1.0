@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "1234"
+    ports:
+      - "15432:5432"
+    volumes:
+      - /data:/var/lib/postgresql/data 
+    networks:
+      - postgres-network
+      
+  pgadmin:
+    image: dpage/pgadmin4    
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "phillrog@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "1234"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
+  
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /home/app
+    entrypoint: ["/bin/bash", "/home/app/entrypoint.sh"]
+    image: portal
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/home/app
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+      - DB_DATABASE=launchstoredb
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - NODE_ENV=development
+    depends_on:
+      - pgadmin
+    env_file: .env
+    networks:
+      - postgres-network
+
+networks: 
+  postgres-network:
+    driver: bridge
